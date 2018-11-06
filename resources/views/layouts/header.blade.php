@@ -33,7 +33,9 @@
 
         <!-- Logo desktop -->
         <a href="#" class="logo">
+
           <img src="{{ asset('images/icons/logo-01.png') }}" alt="IMG-LOGO">
+
         </a>
 
         <!-- Menu desktop -->
@@ -92,7 +94,9 @@
   <div class="wrap-header-mobile">
     <!-- Logo moblie -->
     <div class="logo-mobile">
+
       <a href="index.html"><img src="{{ asset('images/icons/logo-01.png') }}" alt="IMG-LOGO"></a>
+
     </div>
 
     <!-- Icon header -->
@@ -188,7 +192,9 @@
   <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
     <div class="container-search-header">
       <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+
         <img src="{{ asset('images/icons/icon-close2.png') }}" alt="CLOSE">
+
       </button>
 
       <form class="wrap-search-header flex-w p-l-15">
