@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('page.index');
 });
 
-<<<<<<< b11afc705aaea44f888c5f0cdde5ffe085913041
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
@@ -26,10 +25,3 @@ Route::get('/details-product/{id}',[
 	'uses'	=>	'PageController@getDetails'
 ]);
 
-=======
-Route::get('/details-product/{id}',[
-
-	'as'	=>	'detailsproduct',
-	'uses'	=>	'PageController@getDetails'
-]);
->>>>>>> first Commnit from KHOI
