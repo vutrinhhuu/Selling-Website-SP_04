@@ -12,11 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('page.index');
 });
 
 Route::get('/details-product/{id}',[
-
 	'as'	=>	'detailsproduct',
 	'uses'	=>	'PageController@getDetails'
 ]);
+
