@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/details-product/{id}',[
+
+	'as'	=>	'detailsproduct',
+	'uses'	=>	'PageController@getDetails'
+]);
