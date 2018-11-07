@@ -24,12 +24,18 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::get('/details-product/{id}',[
 	'as'	=>	'detailsproduct',
-	'uses'	=>	'PageController@getDetails'
+	'uses'	=>	'PagesController@getDetails'
 ]);
 
 
 Route::get('/list-products-type/{id}',[
 	'as'	=>	'listproductbytype',
-	'uses'	=>	'PageController@getListProductsByType'
+	'uses'	=>	'PagesController@getListProductsByType'
+]);
+
+
+Route::get('/list-products-type/',[
+	'as'	=>	'listproduct',
+	'uses'	=>	'PagesController@getListAllProducts'
 ]);
 
