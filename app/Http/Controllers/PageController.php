@@ -12,5 +12,11 @@ class PageController extends Controller
 
 		return view('page.details_product',compact('product'));
 	}
+
+	public function getListProductsByType($type){
+		$list_products_by_type = Product::where('id_type',$type)->get();
+		//return view('page.details_product',compact('product'));
+		return view('page.list_products_by_type',compact('products'));
+	}
 }
 ?>

@@ -16,12 +16,20 @@ Route::get('/', function () {
 });
 
 
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
+
 Route::get('/details-product/{id}',[
 	'as'	=>	'detailsproduct',
 	'uses'	=>	'PageController@getDetails'
+]);
+
+
+Route::get('/list-products-type/{id}',[
+	'as'	=>	'listproductbytype',
+	'uses'	=>	'PageController@getListProductsByType'
 ]);
 
