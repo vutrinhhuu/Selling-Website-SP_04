@@ -243,11 +243,11 @@
 
     <div class="row isotope-grid">
       @foreach($products as $product)
-         <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{$product->id_type}}">
+         <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{$product->category_id}}">
         <!-- Block2 -->
         <div class="block2">
           <div class="block2-pic hov-img0">
-            <img src="{{ asset($product->image) }}" alt="IMG-PRODUCT">
+            <img src="{{ asset($product->representative_image) }}" alt="IMG-PRODUCT">
 
             <a href="{{route('detailsproduct',$product->id)}}" 
 
