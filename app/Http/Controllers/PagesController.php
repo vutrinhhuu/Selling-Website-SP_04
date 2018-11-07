@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use  App\Product;
 use  App\ProductType;
 use  App\more_images;
+
 use  App\size_colors;
+
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -26,6 +28,7 @@ class PagesController extends Controller
     	}
 
 		return view('page.details_product',compact('product','more_images','size_colors','sizes'));
+
 	}
 
 	

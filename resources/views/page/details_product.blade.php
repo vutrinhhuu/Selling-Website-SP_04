@@ -64,9 +64,11 @@
                     <div class="rs1-select2 bor8 bg0">
                       <select class="js-select2" name="time">
                         <option>Choose an option</option>
+                        
                         @foreach($sizes as $size)
                         <option>Size {{$size}}</option>
                         @endforeach
+
                       </select>
                       <div class="dropDownSelect2"></div>
                     </div>
