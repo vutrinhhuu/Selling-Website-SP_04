@@ -15,8 +15,15 @@ Route::get('/', function () {
     return view('page.index');
 });
 
+
 Route::get('/details-product/{id}',[
 	'as'	=>	'detailsproduct',
 	'uses'	=>	'PageController@getDetails'
+]);
+
+
+Route::get('/list-products-type/{id}',[
+	'as'	=>	'listproductbytype',
+	'uses'	=>	'PageController@getListProductsByType'
 ]);
 
