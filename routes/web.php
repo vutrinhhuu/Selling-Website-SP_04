@@ -17,7 +17,6 @@ Route::get('/', function () {
 
 
 
-
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
@@ -28,11 +27,6 @@ Route::get('/details-product/{id}',[
 	'uses'	=>	'PagesController@getDetails'
 ]);
 
-
-Route::get('/list-products-type/{id}',[
-	'as'	=>	'listproductbytype',
-	'uses'	=>	'PagesController@getListProductsByType'
-]);
 
 
 Route::get('/list-products-type/',[

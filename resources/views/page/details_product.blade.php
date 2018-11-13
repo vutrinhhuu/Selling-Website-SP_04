@@ -1,5 +1,8 @@
 @extends('layouts/master')
 @section('content') 
+ <!-- Cart -->
+@include('layouts/cart')
+ <!-- Product Details -->
 <div class=" p-t-60 p-b-20">
     <div class="container">
       <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">

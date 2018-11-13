@@ -1,5 +1,9 @@
-@extends('layouts/master')
-@section('content') 
+@extends('layouts.master')
+
+@section('content')
+ <!-- Cart -->
+@include('layouts.cart')
+ <!-- List Products --> 
 <div class="container">
 <section class="bg0 p-t-23 p-b-140">
   <div class="container">
