@@ -30,7 +30,7 @@ class Products extends BaseDimmer
             'title'  => "{$count} {$string}",
             'text'   => __('voyager::dimmer.product_text', ['count' => $count, 'string' => Str::lower($string)]),
             'button' => [
-                'text' => 'Products',
+                'text' => __('voyager::dimmer.product_link_text'),
                 'link' => route('voyager.products.index'),
             ],
             'image' => '/product-bg.jpg',
