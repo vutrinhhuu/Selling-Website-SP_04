@@ -19,15 +19,24 @@ class PagesController extends Controller
 		$size_colors = size_colors::where('product_id',$req->id)->get();
 		
 		$sizes=array();
-
+		$sizes_colors_quan = array();
 		// organize the array by cusip
 		foreach($size_colors as $attr){
         	if(!in_array($attr->size, $sizes)){
         		$sizes[]=$attr->size;
+        		$sizes_colors_quan[$attr->size] = array(); 
         	}
     	}
 
-		return view('page.details_product',compact('product','more_images','size_colors','sizes'));
+    	foreach($size_colors as $attr){
+        	if(array_key_exists($attr->size, $sizes_colors_quan)){
+        		if (!in_array($attr->color, $sizes_colors_quan[$attr->size]) )
+        			$sizes_colors_quan[$attr->size][$attr->color] = $attr->quantity; 
+        	}
+    	}
+   
+
+		return view('page.details_product',compact('product','more_images','size_colors','sizes','sizes_colors_quan'));
 
 	}
 
