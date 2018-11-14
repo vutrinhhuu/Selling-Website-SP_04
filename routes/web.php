@@ -30,10 +30,6 @@ Route::get('/details-product/{id}',[
   'uses'  =>  'ProductsController@getDetails'
 ]);
 
-Route::get('/list-products-type/{id}',[
-  'as'  =>  'listproductbytype',
-  'uses'  =>  'ProductsController@getListProductsByType'
-]);
 
 Route::get('/list-products-type/',[
   'as'  =>  'listproduct',
