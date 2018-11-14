@@ -12,5 +12,32 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('product.index');
 });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
+Route::get('/details-product/{id}',[
+  'as'  =>  'detailsproduct',
+  'uses'  =>  'ProductsController@getDetails'
+]);
+
+Route::get('/list-products-type/{id}',[
+  'as'  =>  'listproductbytype',
+  'uses'  =>  'ProductsController@getListProductsByType'
+]);
+
+Route::get('/list-products-type/',[
+  'as'  =>  'listproduct',
+  'uses'  =>  'ProductsController@getListAllProducts'
+]);
+
+Route::get('Search', 'ProductsController@search');
