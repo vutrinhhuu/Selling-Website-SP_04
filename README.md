@@ -5,7 +5,7 @@
 ```bash
 composer install
 ```
-### Create a new database and add your database credentials to your .env file:
+### 1.Create a new database and add your database credentials to your .env file:
 
 ```bash
 cp .env.example .env
@@ -21,13 +21,13 @@ DB_PASSWORD=secret
 php artisan key:generate
 ```
 
-### Run install voyager admin
+### 2.Run install voyager admin
 
 ```bash
 php artisan voyager:install
 ```
 
-### Import .sql file
+### 3.Import .sql file
 
 ```bash
 mysql -u username -p database_name < file.sql
