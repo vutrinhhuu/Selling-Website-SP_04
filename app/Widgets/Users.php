@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use TCG\Voyager\Facades\Voyager;
 
-class Categories extends BaseDimmer
+class Users extends BaseDimmer
 {
     /**
      * The configuration array.
@@ -22,18 +22,18 @@ class Categories extends BaseDimmer
      */
     public function run()
     {
-        $count = \App\Category::count();
-        $string = trans_choice('voyager::dimmer.category', $count);
+        $count = \App\User::count();
+        $string = trans_choice('voyager::dimmer.user', $count);
 
         return view('voyager::dimmer', array_merge($this->config, [
-            'icon'   => 'voyager-categories',
+            'icon'   => 'voyager-person',
             'title'  => "{$count} {$string}",
-            'text'   => __('voyager::dimmer.category_text', ['count' => $count, 'string' => Str::lower($string)]),
+            'text'   => __('voyager::dimmer.user_text', ['count' => $count, 'string' => Str::lower($string)]),
             'button' => [
-                'text' => __('voyager::dimmer.category_link_text'),
-                'link' => route('voyager.categories.index'),
+                'text' => __('voyager::dimmer.user_link_text'),
+                'link' => route('voyager.users.index'),
             ],
-            'image' => voyager_asset('images/widget-backgrounds/02.jpg'),
+            'image' => voyager_asset('images/widget-backgrounds/01.jpg'),
         ]));
     }
 }
