@@ -37,3 +37,8 @@ Route::get('/list-products-type/',[
 ]);
 
 Route::get('Search', 'ProductsController@search');
+
+Route::get('add-to-cart/{id}',[
+	'as'=>'addtocart',
+	'uses'=>'ProductsController@getAddToCart'
+]);

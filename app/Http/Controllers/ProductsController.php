@@ -4,7 +4,9 @@ use  App\Product;
 use  App\Category;
 use  App\MoreImages;
 use  App\SizeColors;
+use App\Cart;
 use Illuminate\Http\Request;
+use Session;
 
 class ProductsController extends Controller
 {
@@ -49,6 +51,22 @@ class ProductsController extends Controller
     ->take(30);
 
     return view('product.list_products', ['product' => $searched_product, 'keyword' => $keyword]);
+  }
+
+
+  public function getAddToCart(Request $req,$id){
+    $product = Product::find($id);
+  
+
+    $oldCart = Session::get('cart')?Session::get('cart'):null;
+    $cart = new Cart($oldCart);
+    $cart->add($product,$id);
+    
+    $req->session()->put('cart',$cart);
+    return redirect()->back();
+
+
+    
   }
 }
 ?>

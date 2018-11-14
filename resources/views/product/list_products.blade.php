@@ -1,5 +1,8 @@
 @extends('layouts/master')
 @section('content')
+<!-- Cart -->
+@include('layouts/cart')
+ <!-- Product Details -->
 <div class="container">
 <section class="bg0 p-t-23 p-b-140">
   <div class="container">
@@ -263,7 +266,7 @@
               </a>
 
               <span class="stext-105 cl3">
-                ${{$product->unit_price}}
+                ${{number_format($product->unit_price)}}
               </span>
             </div>
 

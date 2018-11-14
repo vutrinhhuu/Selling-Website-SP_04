@@ -49,7 +49,7 @@
               </h4>
 
               <span class="mtext-106 cl2">
-                ${{$product->unit_price}}
+                ${{number_format($product->unit_price)}}
               </span>
 
               <p class="stext-102 cl3 p-t-23">
@@ -107,9 +107,8 @@
                       </div>
                     </div>
 
-                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                      Add to cart
-                    </button>
+                      <a href="{{route('addtocart',$product->id)}}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">Add to cart</a>
+                    
                   </div>
                 </div>
               </div>
