@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminTable extends Migration
+class CreateDeliverAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateAdminTable extends Migration
      */
     public function up()
     {
-        Schema::create('admin', function (Blueprint $table) {
+        Schema::create('deliver_addresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username', 60)->nullable(false);
-            $table->string('password', 250)->nullable(false);
+            $table->string('province_city', 200)->nullable();
+            $table->string('county_district', 200)->nullable();
+            $table->string('other_address_details', 200)->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateAdminTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin');
+        Schema::dropIfExists('deliver_addresses');
     }
 }
