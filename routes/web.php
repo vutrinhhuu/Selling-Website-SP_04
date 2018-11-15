@@ -38,12 +38,12 @@ Route::get('/list-products-type/',[
 
 Route::get('Search', 'ProductsController@search');
 
-Route::get('add-to-cart/{id}/{amount}',[
+Route::get('add-to-cart/{id}/{id_size_color}/{num_product}',[
 	'as'=>'addtocart',
 	'uses'=>'CartController@getAddToCart'
 ]);
 
-Route::get('delete-car/{id}',[
+Route::get('delete-car/{id_size_color}',[
 	'as'=>'deletecart',
 	'uses'=>'CartController@getDelItemCart'
 ]);

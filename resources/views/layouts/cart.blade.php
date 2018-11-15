@@ -1,3 +1,4 @@
+
 <div class="wrap-header-cart js-panel-cart">
   <div class="s-full js-hide-cart"></div>
 
@@ -17,18 +18,24 @@
 
 
         @if(Session::has('cart'))
-          @foreach($product_cart as $product)
+        <?php
+          echo '<script>';
+          echo 'console.log('. json_encode( $product_cart ) .')';
+          echo '</script>';
+        ?>
+        
+           @foreach($product_cart as $key=> $product)
             <li class="header-cart-item flex-w flex-t m-b-12">
               <div class="header-cart-item-img">
-                <img src="{{ asset('storage/'.$product['item']['representative_image']) }}"
-                height="50" width="50" alt="IMG">
+                <a href="{{route('deletecart',$key )}}"><img src="{{ asset('storage/'.$product['item']['representative_image'])}}"
+                height="80" width="56" alt="IMG"></a>
               </div>
 
               <div class="header-cart-item-txt p-t-8">
-                <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                 {{$product['item']['name']}}
+                <a href="{{route('detailsproduct',$product['item']['id'])}}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                 {{$product['item']['name']}} <br/>
+                 ({{$product['size_color']['size']}} - {{$product['size_color']['color']}})
                 </a>
-
                 <span class="header-cart-item-info">
                   {{$product['qty']}} x ${{number_format($product['item']['promotion_price'])}}
                 </span>
@@ -40,7 +47,11 @@
 
       <div class="w-full">
         <div class="header-cart-total w-full p-tb-40">
+          @if(Session::has('cart'))
           Total: ${{number_format(Session('cart')->totalPrice)}}
+          @else
+          Total: $0
+          @endif
         </div>
 
         <div class="header-cart-buttons flex-w w-full">

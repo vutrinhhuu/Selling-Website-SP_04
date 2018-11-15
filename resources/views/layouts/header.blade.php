@@ -32,7 +32,7 @@
       <nav class="limiter-menu-desktop container">
 
         <!-- Logo desktop -->
-        <a href="#" class="logo">
+        <a href="{{ url('/') }}" class="logo">
           <img src="{{ asset('images/icons/logo-01.png') }}" alt="IMG-LOGO">
         </a>
 
@@ -40,11 +40,11 @@
         <div class="menu-desktop">
           <ul class="main-menu">
             <li class="active-menu">
-              <a href="index.html">Home</a>
+              <a href="{{ url('/') }}">Home</a>
             </li>
 
             <li>
-              <a href="product.html">Shop</a>
+              <a href="{{route('listproduct')}}">Shop</a>
             </li>
 
             <li class="label1" data-label1="hot">
