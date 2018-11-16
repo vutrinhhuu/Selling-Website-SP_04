@@ -19,10 +19,9 @@ class CartController extends Controller
     $cart = new Cart($oldCart);
 
     $cart->addWithAmount($product,$id,$id_size_color,$num_product);
-    
     $req->session()->put('cart',$cart);
-    return redirect()->back();
-
+    
+    return view('layouts.cart');
   }
 
   public function getDelItemCart($id){

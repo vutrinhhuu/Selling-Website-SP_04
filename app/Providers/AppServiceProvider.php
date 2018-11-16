@@ -25,12 +25,8 @@ class AppServiceProvider extends ServiceProvider
                             'totalPrice'=>$cart->totalPrice,
                             'totalQty'=>$cart->totalQty]);
                 
-                $data = $cart;  
-               
-              
+                $data = $cart;   
             }
-
-          
         });
 
     }

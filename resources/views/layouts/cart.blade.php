@@ -9,7 +9,7 @@
       </span>
 
       <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-        <i class="zmdi zmdi-close"></i>
+        <i class="zmdi zmdi-close" id="close_cart"></i>
       </div>
     </div>
 
@@ -67,3 +67,4 @@
     </div>
   </div>
 </div>
+

@@ -1,9 +1,12 @@
+
 @extends('layouts/master')
+
 @section('content')
 <!-- Cart -->
 @include('layouts/cart')
-<!-- Product Details -->
+<div id="cart"></div>
 
+<!-- Product Details -->
 <div class=" p-t-60 p-b-20">
   <div class="container">
     <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
@@ -118,7 +121,7 @@
                   </div>
                 </div>
 
-                <button onclick="send_data_to_cart()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">Add to cart</button>
+                <button id="add_to_cart"  class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">Add to cart</button>
 
 
               </div>
@@ -151,7 +154,8 @@
   </div>
 </div>
 </div>
-<!--===============================================================================================-->
+
+<!--==================================================================-->
 
 <script>
   function populate(s1,s2){
@@ -186,7 +190,7 @@ for (i = 0; i < sizes.length; i++) {
 }
 
 </script>
-<!--===============================================================================================-->
+<!--============================================================-->
 <script>
   function send_data_to_cart(){ 
     var num_product = document.getElementById('num_product').value;
@@ -194,20 +198,103 @@ for (i = 0; i < sizes.length; i++) {
     var color = document.getElementById('color').value;;
     var product_id = '<?php echo $product->id;?>';
     var sizes_colors =JSON.parse('<?php echo $sizes_colors;?>');
-  
+
     for( var i = 0, len = sizes_colors.length; i < len; i++ ) { 
       if( sizes_colors[i]['size'] == size &&
         sizes_colors[i]['color'] == color &&
         sizes_colors[i]['product_id'] == product_id ) {
         var id_size_color = sizes_colors[i]['id'];
+      var db_num_product = sizes_colors[i]['quantity'];
       break;
     }
   }
- if(typeof id_size_color !== "undefined")
-  {
-   window.location = '/add-to-cart/'+product_id+'/'+id_size_color+'/'+num_product;
-  }else alert("Please choose size and color");
- }
+  if(db_num_product == 0 ){
+    alert("This product had been sold out");
+    return;
+  }
+  if(num_product > db_num_product){
+    alert("Not have enough product");
+    return;
+  }
+  if(typeof id_size_color == "undefined"){
+    alert("Please choose size and color");
+    return;
+  }
+  
+  window.location = '/add-to-cart/'+product_id+'/'+id_size_color+'/'+num_product;
+
+}
 </script>
-<!--===============================================================================================-->
+<!--==================================================================-->
+
+
+<script>
+  $(document).ready(function(){
+
+  $("#add_to_cart").click(function(){
+     var num_product = document.getElementById('num_product').value;
+     var size = document.getElementById('size').value;;
+     var color = document.getElementById('color').value;;
+     var product_id = '<?php echo $product->id;?>';
+     var sizes_colors =JSON.parse('<?php echo $sizes_colors;?>');
+
+    for( var i = 0, len = sizes_colors.length; i < len; i++ ) { 
+      if( sizes_colors[i]['size'] == size &&
+        sizes_colors[i]['color'] == color &&
+        sizes_colors[i]['product_id'] == product_id ) {
+        var id_size_color = sizes_colors[i]['id'];
+      var db_num_product = sizes_colors[i]['quantity'];
+      break;
+      }
+    }
+  if(db_num_product == 0 ){
+    alert("This product had been sold out");
+    return;
+  }
+  if(num_product > db_num_product){
+    alert("Not have enough product");
+    return;
+  }
+  if(typeof id_size_color == "undefined"){
+    alert("Please choose size and color");
+    return;
+  }
+  
+  url_add_to_cart = '/add-to-cart/'+product_id+'/'+id_size_color+'/'+num_product;
+  
+  //update cart and total quantity in cart
+  $.ajax({
+    data: url_add_to_cart,total_quantity_cart,
+    url:url_add_to_cart,
+    success: function(result){
+      $("#cart").html(result);
+    }
+  });
+
+     var total_quantity_cart = 
+      <?php 
+      if(Session::has('cart') ) {
+        echo Session('cart')->totalQty;
+      }
+      else echo 0;
+      ?>;;
+      console.log(total_quantity_cart);
+      $('#total_quantity_cart').attr("data-notify","+"+num_product);
+
+  var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();  
+  swal(nameProduct, "is added to cart !", "success"); 
+  });
+});
+
+</script>
+
+<!--=================================================================-->
+<script>
+  $('body').on('click', '#close_cart', function (){
+    $('.js-panel-cart').removeClass('show-header-cart');
+  });
+</script>
+<!--=================================================================-->
+
+
 @endsection
