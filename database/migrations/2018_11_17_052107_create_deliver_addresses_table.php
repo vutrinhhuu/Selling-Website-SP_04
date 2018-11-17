@@ -15,6 +15,8 @@ class CreateDeliverAddressesTable extends Migration
     {
         Schema::create('deliver_addresses', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('order_id')->unsigned();
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->string('province_city', 200)->nullable();
             $table->string('county_district', 200)->nullable();
             $table->string('other_address_details', 200)->nullable();
