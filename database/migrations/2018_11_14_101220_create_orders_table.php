@@ -24,8 +24,6 @@ class CreateOrdersTable extends Migration
             $table->timestamp('deliver_day')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('deliver_address_id')->unsigned();
-            $table->foreign('deliver_address_id')->references('id')->on('deliver_addresses');
             $table->integer('payment_method_id')->unsigned();
             $table->foreign('payment_method_id')->references('id')->on('payment_methods');
             $table->integer('status')->nullable();
