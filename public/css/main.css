@@ -996,11 +996,13 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   content: '\e870';
   font-family: Linearicons-Free;
   font-size: 16px;
+  
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
+
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -1019,6 +1021,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 .header-cart-item-img:hover:after {
   opacity: 1;
+  pointer-events: none;
 }
 
 /*---------------------------------------------*/

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminTable extends Migration
+class CreatePaymentMethodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateAdminTable extends Migration
      */
     public function up()
     {
-        Schema::create('admin', function (Blueprint $table) {
+        Schema::create('payment_methods', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username', 60)->nullable(false);
-            $table->string('password', 250)->nullable(false);
+            $table->string('name', 200)->nullable(false);
+            $table->text('description')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateAdminTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin');
+        Schema::dropIfExists('payment_methods');
     }
 }
