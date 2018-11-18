@@ -12,32 +12,38 @@
 */
 
 Route::get('/', function () {
-    return view('product.index');
+	return view('product.index');
 });
 
 
 Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
+	Voyager::routes();
 });
 
 
 Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
+	Voyager::routes();
 });
 
 Route::get('/details-product/{id}',[
-  'as'  =>  'detailsproduct',
-  'uses'  =>  'ProductsController@getDetails'
+	'as'  =>  'detailsproduct',
+	'uses'  =>  'ProductsController@getDetails'
 ]);
 
-Route::get('/list-products-type/{id}',[
-  'as'  =>  'listproductbytype',
-  'uses'  =>  'ProductsController@getListProductsByType'
-]);
 
 Route::get('/list-products-type/',[
-  'as'  =>  'listproduct',
-  'uses'  =>  'ProductsController@getListAllProducts'
+	'as'  =>  'listproduct',
+	'uses'  =>  'ProductsController@getListAllProducts'
 ]);
 
 Route::get('Search', 'ProductsController@search');
+
+Route::get('add-to-cart/{id}/{id_size_color}/{num_product}',[
+	'as'=>'addtocart',
+	'uses'=>'CartController@getAddToCart'
+]);
+
+Route::get('delete-car/{id_size_color}',[
+	'as'=>'deletecart',
+	'uses'=>'CartController@getDelItemCart'
+]);
