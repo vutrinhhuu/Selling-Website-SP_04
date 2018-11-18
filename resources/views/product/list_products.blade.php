@@ -1,5 +1,8 @@
 @extends('layouts/master')
 @section('content')
+<!-- Cart -->
+@include('layouts/cart')
+ <!-- Product Details -->
 <div class="container">
 <section class="bg0 p-t-23 p-b-140">
   <div class="container">
@@ -263,7 +266,13 @@
               </a>
 
               <span class="stext-105 cl3">
-                ${{$product->unit_price}}
+               
+                @if($product->promotion_price !=0 )
+                ${{number_format($product->promotion_price)}}
+                <span style="color:grey;font-size:10px"><strike>${{number_format($product->unit_price)}}</strike></span>
+                @else
+                 ${{number_format($product->unit_price)}}
+                @endif
               </span>
             </div>
 

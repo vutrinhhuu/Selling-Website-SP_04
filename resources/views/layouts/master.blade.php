@@ -34,6 +34,8 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
 <!--===============================================================================================-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 <body class="animsition">
 
@@ -41,6 +43,7 @@
   @include('layouts.header')
 
   @yield ('content')
+
 
   <!-- Footer -->
   @include('layouts.footer')
@@ -57,6 +60,8 @@
   @yield ('modal')
 
 <!--===============================================================================================-->
+
+
   <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js') }}"></script>
 <!--===============================================================================================-->
   <script src="{{ asset('vendor/animsition/js/animsition.min.js') }}"></script>
