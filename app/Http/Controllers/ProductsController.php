@@ -15,19 +15,24 @@ class ProductsController extends Controller
     $size_colors = SizeColors::where('product_id',$req->id)->get();
 
     $sizes = array();
-    $colors = array();
+    $sizes_colors_quan = array();
 
     // organize the array by cusip
     foreach($size_colors as $attr){
       if(!in_array($attr->size, $sizes)){
-        $sizes[] = $attr->size;
-      }
-
-      if(!in_array($attr->color, $colors)){
-        $colors[] = $attr->color;
+        $sizes[]=$attr->size;
+        $sizes_colors_quan[$attr->size] = array(); 
       }
     }
-    return view('product.details_product',compact('product', 'more_images', 'size_colors', 'sizes', 'colors'));
+
+    foreach($size_colors as $attr){
+      if(array_key_exists($attr->size, $sizes_colors_quan)){
+        if (!in_array($attr->color, $sizes_colors_quan[$attr->size]) )
+          $sizes_colors_quan[$attr->size][$attr->color] = $attr->quantity; 
+      }
+    }
+
+    return view('product.details_product',compact('product', 'more_images', 'size_colors', 'sizes','sizes_colors_quan'));
   }
 
   public function getListAllProducts(){
@@ -41,7 +46,7 @@ class ProductsController extends Controller
     $keyword = $request->keyword;
 
     $product = Product::where('name', 'like', '%$keyword%')
-                      ->take(30);
+    ->take(30);
 
     return view('product.list_products', ['product' => $searched_product, 'keyword' => $keyword]);
   }

@@ -1,5 +1,8 @@
 @extends('layouts/master')
 @section('content')
+<!-- Cart -->
+@include('layouts/cart')
+ <!-- Product Details -->
 <div class=" p-t-60 p-b-20">
     <div class="container">
       <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
@@ -62,11 +65,11 @@
 
                   <div class="size-204 respon6-next">
                     <div class="rs1-select2 bor8 bg0">
-                      <select class="js-select2" name="time">
-                        <option>Choose an option</option>
-
-                        @foreach($sizes as $size)
-                          <option>Size {{$size}}</option>
+                      <select id = "size" name="size" onchange="populate(this.id,'color')"class="js-select2" name="time">
+                        <option value="">Choose an option</option>
+                          
+                        @foreach(array_keys($sizes_colors_quan) as $size)
+                        <option value='{{$size}}'>Size {{$size}}</option>
                         @endforeach
 
                       </select>
@@ -82,11 +85,8 @@
 
                   <div class="size-204 respon6-next">
                     <div class="rs1-select2 bor8 bg0">
-                      <select class="js-select2" name="time">
-                        <option>Choose an option</option>
-                        @foreach($colors as $color)
-                          <option>{{$color}}</option>
-                        @endforeach
+                      <select id= "color" name="color" class="js-select2" name="time">
+                        <option value="">Choose size first</option>
                       </select>
                       <div class="dropDownSelect2"></div>
                     </div>
@@ -140,4 +140,35 @@
       </div>
     </div>
 </div>
+<!--===============================================================================================-->
+
+<script>
+function populate(s1,s2){
+  var s1 = document.getElementById(s1);
+  var s2 = document.getElementById(s2);
+  s2.innerHTML = "";
+  //pass PHP variable to JS
+  var data = <?php echo json_encode($sizes_colors_quan); ?>;
+
+  //get size from JSON
+  var sizes = [];
+  for(var k in data) sizes.push(k);
+
+
+  //get colors from key:sizes
+  for (i = 0; i < sizes.length; i++) { 
+    if(s1.value == sizes[i])
+      var optionArray = data[sizes[i]];  
+  }
+
+  //render option for colors
+  for(var option in optionArray){
+    var newOption = document.createElement("option");
+    newOption.value = option;
+    newOption.innerHTML = option;
+    s2.options.add(newOption);
+  }
+}
+</script>
+<!--===============================================================================================-->
 @endsection
