@@ -81,10 +81,10 @@ class Cart
 
 		$this->totalQty+=$amount;
 		if($item->promotion_price == $item->unit_price){
-			$this->totalPrice += $item->unit_price;
+			$this->totalPrice += $item->unit_price * $giohang['qty'];
 		}
 		else{
-			$this->totalPrice += $item->promotion_price;
+			$this->totalPrice += $item->promotion_price * $giohang['qty'];
 		}
 		
 	}

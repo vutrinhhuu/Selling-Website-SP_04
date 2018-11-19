@@ -27,8 +27,8 @@
            @foreach($product_cart as $key=> $product)
             <li class="header-cart-item flex-w flex-t m-b-12">
               <div class="header-cart-item-img">
-                <a href="{{route('deletecart',$key )}}"><img src="{{ asset('storage/'.$product['item']['representative_image'])}}"
-                height="80" width="56" alt="IMG"></a>
+                <a href="{{route('deletecart',$key )}}"><img src="{{ asset('images/'.$product['item']['representative_image'])}}"
+                width="60" alt="IMG"></a>
               </div>
 
               <div class="header-cart-item-txt p-t-8">
@@ -37,7 +37,7 @@
                  ({{$product['size_color']['size']}} - {{$product['size_color']['color']}})
                 </a>
                 <span class="header-cart-item-info">
-                  {{$product['qty']}} x ${{number_format($product['item']['promotion_price'])}}
+                  {{$product['qty']}} x {{number_format($product['item']['promotion_price'])}} VND
                 </span>
               </div>
             </li>
@@ -48,9 +48,9 @@
       <div class="w-full">
         <div class="header-cart-total w-full p-tb-40">
           @if(Session::has('cart'))
-          Total: ${{number_format(Session('cart')->totalPrice)}}
+          Total: {{number_format(Session('cart')->totalPrice)}} VND
           @else
-          Total: $0
+          Total: 0 VND
           @endif
         </div>
 

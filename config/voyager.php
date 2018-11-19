@@ -160,9 +160,10 @@ return [
         ],
 
         'widgets' => [
-            'App\\Widgets\\Users',
-            'App\\Widgets\\Products',
+            // 'App\\Widgets\\Users',
             'App\\Widgets\\Categories',
+            'App\\Widgets\\Products',
+            'App\\Widgets\\Orders',
         ],
 
     ],

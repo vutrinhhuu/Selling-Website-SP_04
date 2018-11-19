@@ -10,6 +10,12 @@ use Session;
 
 class ProductsController extends Controller
 {
+  public function getHomePage(){
+    $products = Product::all();
+    $categories = Category::all();
+    return view('product.index',compact('products','categories'));
+  }
+
   public function getDetails(Request $req){
     $product = Product::where('id',$req->id)->first();
 
@@ -38,7 +44,7 @@ class ProductsController extends Controller
   public function getListAllProducts(){
     $products = Product::all();
     $categories = Category::all();
-    return view('product.list_products',compact('products','categories'));
+    return view('product.shop',compact('products','categories'));
   }
 
   public function search(Request $request)

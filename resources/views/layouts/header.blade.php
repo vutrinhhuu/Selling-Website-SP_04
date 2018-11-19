@@ -17,13 +17,6 @@
             My Account
           </a>
 
-          <a href="#" class="flex-c-m trans-04 p-lr-25">
-            EN
-          </a>
-
-          <a href="#" class="flex-c-m trans-04 p-lr-25">
-            USD
-          </a>
         </div>
       </div>
     </div>
@@ -47,21 +40,6 @@
               <a href="{{route('listproduct')}}">Shop</a>
             </li>
 
-            <li class="label1" data-label1="hot">
-              <a href="shoping-cart.html">Features</a>
-            </li>
-
-            <li>
-              <a href="blog.html">Blog</a>
-            </li>
-
-            <li>
-              <a href="about.html">About</a>
-            </li>
-
-            <li>
-              <a href="contact.html">Contact</a>
-            </li>
           </ul>
         </div>
 

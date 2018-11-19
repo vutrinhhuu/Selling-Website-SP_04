@@ -11,19 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-	return view('product.index');
-});
+Route::get('/', [
+	'as'  =>  'home',
+	'uses'  =>  'ProductsController@getHomePage'
+]);
 
 
 Route::group(['prefix' => 'admin'], function () {
 	Voyager::routes();
 });
 
-
-Route::group(['prefix' => 'admin'], function () {
-	Voyager::routes();
-});
 
 Route::get('/details-product/{id}',[
 	'as'  =>  'detailsproduct',
@@ -31,7 +28,7 @@ Route::get('/details-product/{id}',[
 ]);
 
 
-Route::get('/list-products-type/',[
+Route::get('/shop/',[
 	'as'  =>  'listproduct',
 	'uses'  =>  'ProductsController@getListAllProducts'
 ]);
