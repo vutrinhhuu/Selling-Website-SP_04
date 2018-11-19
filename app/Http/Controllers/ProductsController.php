@@ -51,10 +51,11 @@ class ProductsController extends Controller
   {
     $keyword = $request->keyword;
 
-    $product = Product::where('name', 'like', '%$keyword%')
-    ->take(30);
+    $products = Product::where('name', 'like', '%'.$keyword.'%')->get();
 
-    return view('product.list_products', ['product' => $searched_product, 'keyword' => $keyword]);
+    $categories = Category::all();
+
+    return view('product.shop', compact('products','categories','keyword'));
   }
 }
 ?>

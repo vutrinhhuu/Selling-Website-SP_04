@@ -33,7 +33,7 @@ Route::get('/shop/',[
 	'uses'  =>  'ProductsController@getListAllProducts'
 ]);
 
-Route::get('Search', 'ProductsController@search');
+Route::get('/search', 'ProductsController@search');
 
 Route::get('add-to-cart/{id}/{id_size_color}/{num_product}',[
 	'as'=>'addtocart',
