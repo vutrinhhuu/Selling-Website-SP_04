@@ -47,6 +47,13 @@ class ProductsController extends Controller
     return view('product.shop',compact('products','categories'));
   }
 
+  public function searchByCategory($id)
+  {
+    $products = Product::where('category_id', $id)->get();
+    $categories = Category::all();
+    return view('product.shop',compact('products', 'categories'));
+  }
+
   public function search(Request $request)
   {
     $keyword = $request->keyword;

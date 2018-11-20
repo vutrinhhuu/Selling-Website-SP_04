@@ -38,14 +38,14 @@ Route::get('/search', [
 	'uses'  =>  'ProductsController@search'
 ]);
 
+Route::get('searchByCategory/{id}', 'ProductsController@searchByCategory');
+
 Route::get('add-to-cart/{id}/{id_size_color}/{num_product}',[
 	'as'=>'addtocart',
 	'uses'=>'CartController@getAddToCart'
 ]);
 
-Route::get('user/{userId}', 'UserController@getProfilePage');
-
-Route::get('user/order/{orderId}', 'UserController@getOrderDetail');
+Route::get('user/{userId}', 'UserController@getUser');
 
 Route::get('delete-car/{id_size_color}',[
 	'as'=>'deletecart',

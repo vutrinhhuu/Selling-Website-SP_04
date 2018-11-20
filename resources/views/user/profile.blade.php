@@ -20,22 +20,22 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
+                            <img src="{{ asset('images/'.$user->avatar) }}" alt=""/>
+                            {{-- <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file"/>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                                    <h5>
-                                        Kshiti Ghelani
-                                    </h5>
-                                    <h6>
-                                        Web Developer and Designer
-                                    </h6>
-                                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+							<h5>
+								{{$user->username}}
+							</h5>
+							{{-- <h6>
+								Web Developer and Designer
+							</h6> --}}
+						<p class="proile-rating">NUMBER OF ORDERS : <span>{{$user->orders->count()}}</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -46,34 +46,22 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    {{-- <div class="col-md-2">
                         <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="profile-work">
-                            <p>WORK LINK</p>
-                            <a href="">Website Link</a><br/>
-                            <a href="">Bootsnipp Profile</a><br/>
-                            <a href="">Bootply Profile</a>
-                            <p>SKILLS</p>
-                            <a href="">Web Designer</a><br/>
-                            <a href="">Web Developer</a><br/>
-                            <a href="">WordPress</a><br/>
-                            <a href="">WooCommerce</a><br/>
-                            <a href="">PHP, .Net</a><br/>
-                        </div>
                     </div>
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>User Id</label>
+                                                <label>Username</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Kshiti123</p>
+												<p>{{$user->username}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -81,7 +69,7 @@
                                                 <label>Name</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Kshiti Ghelani</p>
+                                                <p>{{$user->fullname}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -89,7 +77,7 @@
                                                 <label>Email</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>kshitighelani@gmail.com</p>
+                                                <p>{{$user->email}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -97,15 +85,15 @@
                                                 <label>Phone</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>123 456 7890</p>
+                                                <p>{{$user->phone}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Profession</label>
+                                                <label>Address</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Web Developer and Designer</p>
+												<p>{{$user->address}}</p>
                                             </div>
                                         </div>
                             </div>
@@ -128,7 +116,10 @@
 										          </tr>
 										        </thead>
 										        <tbody>
-										        	@if(!empty($orders))
+													@if(!empty($user->orders))
+														@php
+															$orders = $user->orders;
+														@endphp
 											          	@foreach($orders as $order)
 							                                <tr>
 							                                    <td>{{$order->id}}</td>
@@ -136,9 +127,9 @@
 							                                    <td>{{$order->total}} VND</td>
 							                                    <td>{{$order->order_day}}</td>
 							                                    @if($order->payment_status == 0)
-											                        <td>Not payed</td>
+											                        <td>Not paid</td>
 											                    @elseif($order->payment_status == 1)
-											                    	<td>Payed</td>
+											                    	<td>Paid</td>
 											                    @endif
 											                    <td>{{$order->payment_day}}</td>
 							                                    <td>{{$order->payment_method->name}}</td>
@@ -148,7 +139,7 @@
 											                    	<td>Delivered</td>
 											                    @endif
 							                                    <td>{{$order->deliver_day}}</td>
-							                                    <td class="center"><a type="button" class="btn btn-success" data-toggle="modal" data-target="#orderDetailModal" href="user/order/{{$order->id}}">View</a></td>
+							                                    <td class="center"><a type="button" class="btn btn-primary" data-toggle="modal" data-target="#orderDetailModal">View</a></td>
 							                                </tr>
 							                            @endforeach
 						                            @endif
@@ -170,7 +161,7 @@
     <!-- Modal content-->
     <div class="modal-content">
         <!-- Shoping Cart -->
-		<form class="bg0 p-t-75 p-b-85">
+		{{-- <form class="bg0 p-t-75 p-b-85"> --}}
 			<div class="container">
 				<div class="row">
 					<table class="table-shopping-cart">
@@ -181,12 +172,15 @@
 							<th class="column-4">Quantity</th>
 							<th class="column-5">Total</th>
 						</tr>
-						@if(!empty($orderDetails))
+						@if(!empty($order->details))
+							@php
+								$orderDetails = $order->details;
+							@endphp
 							@foreach($orderDetails as $orderDetail)
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="images/item-cart-04.jpg" alt="IMG">
+											<img src="{{ asset('images/'.$orderDetail->product->representative_image) }}" alt="IMG">
 										</div>
 									</td>
 									<td class="column-2">{{$orderDetail->product->name}}</td>
@@ -199,7 +193,7 @@
 					</table>
 				</div>
 			</div>
-		</form>
+		{{-- </form> --}}
       <div class="modal-footer">
         <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
       </div>
