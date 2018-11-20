@@ -37,3 +37,9 @@ Route::get('/list-products-type/',[
 ]);
 
 Route::get('Search', 'ProductsController@search');
+
+// user
+Route::get('user/{userId}', 'UserController@getProfilePage');
+
+Route::get('user/order/{orderId}', 'UserController@getOrderDetail');
+

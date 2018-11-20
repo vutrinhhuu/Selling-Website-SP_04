@@ -15,9 +15,9 @@
                 <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                 <div class="slick3 gallery-lb">
-                  <div class="item-slick3" data-thumb="{{ asset('storage/'.$product->representative_image) }}">
+                  <div class="item-slick3" data-thumb="{{ asset('images/'.$product->representative_image) }}">
                     <div class="wrap-pic-w pos-relative">
-                      <img src="{{ asset('storage/'.$product->representative_image) }}" alt="IMG-PRODUCT">
+                      <img src="{{ asset('images/'.$product->representative_image) }}" alt="IMG-PRODUCT">
 
                       <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset($product->representative_image) }}">
                         <i class="fa fa-expand"></i>
@@ -26,11 +26,11 @@
                   </div>
 
                   @foreach($more_images as $img)
-                  <div class="item-slick3" data-thumb="{{ asset('storage/'.$img->image) }}">
+                  <div class="item-slick3" data-thumb="{{ asset('images/'.$img->image) }}">
                     <div class="wrap-pic-w pos-relative">
-                      <img src="{{ asset('storage/'.$img->image) }}" alt="IMG-PRODUCT">
+                      <img src="{{ asset('images/'.$img->image) }}" alt="IMG-PRODUCT">
 
-                      <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('storage/'.$img->image) }}">
+                      <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('images/'.$img->image) }}">
                         <i class="fa fa-expand"></i>
                       </a>
                     </div>
