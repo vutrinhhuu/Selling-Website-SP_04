@@ -8,13 +8,13 @@ class OrderDetail extends Model
 {
 	protected $table = "order_details";
 
-    public function order()
-    {
-      return $this->belongsTo(Order::class);
-    }
+  public function order()
+  {
+    return $this->belongsTo(Order::class);
+  }
 
-    public function product()
-    {
-      return $this->belongsTo('App\Product', 'product_id', 'id');
-    }
+  public function product()
+  {
+    return $this->belongsTo(Product::class);
+  }
 }

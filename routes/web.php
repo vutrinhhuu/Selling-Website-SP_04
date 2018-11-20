@@ -11,35 +11,40 @@
 |
 */
 
-Route::get('/', function () {
-    return view('product.index');
-});
+Route::get('/', [
+	'as'  =>  'home',
+	'uses'  =>  'ProductsController@getHomePage'
+]);
 
 
 Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
+	Voyager::routes();
 });
 
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
 
 Route::get('/details-product/{id}',[
-  'as'  =>  'detailsproduct',
-  'uses'  =>  'ProductsController@getDetails'
+	'as'  =>  'detailsproduct',
+	'uses'  =>  'ProductsController@getDetails'
 ]);
 
 
-Route::get('/list-products-type/',[
-  'as'  =>  'listproduct',
-  'uses'  =>  'ProductsController@getListAllProducts'
+Route::get('/shop/',[
+	'as'  =>  'listproduct',
+	'uses'  =>  'ProductsController@getListAllProducts'
 ]);
 
-Route::get('Search', 'ProductsController@search');
+Route::get('/search', 'ProductsController@search');
 
-// user
+Route::get('add-to-cart/{id}/{id_size_color}/{num_product}',[
+	'as'=>'addtocart',
+	'uses'=>'CartController@getAddToCart'
+]);
+
 Route::get('user/{userId}', 'UserController@getProfilePage');
 
 Route::get('user/order/{orderId}', 'UserController@getOrderDetail');
 
+Route::get('delete-car/{id_size_color}',[
+	'as'=>'deletecart',
+	'uses'=>'CartController@getDelItemCart'
+]);

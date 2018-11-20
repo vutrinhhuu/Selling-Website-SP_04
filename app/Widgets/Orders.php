@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use TCG\Voyager\Facades\Voyager;
 
-class Products extends BaseDimmer
+class Orders extends BaseDimmer
 {
     /**
      * The configuration array.
@@ -23,17 +23,17 @@ class Products extends BaseDimmer
     public function run()
     {
         $count = \App\Product::count();
-        $string = trans_choice('Product|Products', $count);
+        $string = trans_choice('Order|Orders', $count);
 
         return view('voyager::dimmer', array_merge($this->config, [
-            'icon'   => 'voyager-bag',
+            'icon'   => 'voyager-buy',
             'title'  => "{$count} {$string}",
-            'text'   => __('You have :count :string in your database. Click on button below to view all products.', ['count' => $count, 'string' => Str::lower($string)]),
+            'text'   => __('You have :count :string in your database. Click on button below to view all orders.', ['count' => $count, 'string' => Str::lower($string)]),
             'button' => [
-                'text' => __('View all products'),
-                'link' => route('voyager.products.index'),
+                'text' => __('View all orders'),
+                'link' => route('voyager.orders.index'),
             ],
-            'image' => 'images/dashboard/product-bg.jpg',
+            'image' => 'images/dashboard/order-bg.jpeg',
         ]));
     }
 }
