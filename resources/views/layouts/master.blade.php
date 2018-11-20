@@ -4,7 +4,7 @@
   <title>Home</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
+  <!--===============================================================================================-->
   <link rel="icon" type="image/png" href="{{ asset('images/icons/favicon.png') }}"/>
 <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
@@ -33,7 +33,11 @@
 <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+  
+  @yield('style')
 <!--===============================================================================================-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 <body class="animsition">
 
@@ -41,6 +45,7 @@
   @include('layouts.header')
 
   @yield ('content')
+
 
   <!-- Footer -->
   @include('layouts.footer')
@@ -57,6 +62,8 @@
   @yield ('modal')
 
 <!--===============================================================================================-->
+
+
   <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js') }}"></script>
 <!--===============================================================================================-->
   <script src="{{ asset('vendor/animsition/js/animsition.min.js') }}"></script>

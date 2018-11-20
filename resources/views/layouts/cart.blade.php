@@ -1,3 +1,4 @@
+
 <div class="wrap-header-cart js-panel-cart">
   <div class="s-full js-hide-cart"></div>
 
@@ -8,64 +9,49 @@
       </span>
 
       <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-        <i class="zmdi zmdi-close"></i>
+        <i class="zmdi zmdi-close" id="close_cart"></i>
       </div>
     </div>
 
     <div class="header-cart-content flex-w js-pscroll">
       <ul class="header-cart-wrapitem w-full">
-        <li class="header-cart-item flex-w flex-t m-b-12">
-          <div class="header-cart-item-img">
-            <img src="{{ asset('images/item-cart-01.jpg') }}" alt="IMG">
-          </div>
 
-          <div class="header-cart-item-txt p-t-8">
-            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-              White Shirt Pleat
-            </a>
 
-            <span class="header-cart-item-info">
-              1 x $19.00
-            </span>
-          </div>
-        </li>
+        @if(Session::has('cart'))
+        <?php
+          echo '<script>';
+          echo 'console.log('. json_encode( $product_cart ) .')';
+          echo '</script>';
+        ?>
+        
+           @foreach($product_cart as $key=> $product)
+            <li class="header-cart-item flex-w flex-t m-b-12">
+              <div class="header-cart-item-img">
+                <a href="{{route('deletecart',$key )}}"><img src="{{ asset('images/'.$product['item']['representative_image'])}}"
+                width="60" alt="IMG"></a>
+              </div>
 
-        <li class="header-cart-item flex-w flex-t m-b-12">
-          <div class="header-cart-item-img">
-            <img src="{{ asset('images/item-cart-02.jpg') }}" alt="IMG">
-          </div>
-
-          <div class="header-cart-item-txt p-t-8">
-            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-              Converse All Star
-            </a>
-
-            <span class="header-cart-item-info">
-              1 x $39.00
-            </span>
-          </div>
-        </li>
-
-        <li class="header-cart-item flex-w flex-t m-b-12">
-          <div class="header-cart-item-img">
-            <img src="{{ asset('images/item-cart-03.jpg') }}" alt="IMG">
-          </div>
-
-          <div class="header-cart-item-txt p-t-8">
-            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-              Nixon Porter Leather
-            </a>
-
-            <span class="header-cart-item-info">
-              1 x $17.00
-            </span>
-          </div>
-        </li>
+              <div class="header-cart-item-txt p-t-8">
+                <a href="{{route('detailsproduct',$product['item']['id'])}}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                 {{$product['item']['name']}} <br/>
+                 ({{$product['size_color']['size']}} - {{$product['size_color']['color']}})
+                </a>
+                <span class="header-cart-item-info">
+                  {{$product['qty']}} x {{number_format($product['item']['promotion_price'])}} VND
+                </span>
+              </div>
+            </li>
+          @endforeach
+        @endif
       </ul>
 
       <div class="w-full">
         <div class="header-cart-total w-full p-tb-40">
-          Total: $75.00
+          @if(Session::has('cart'))
+          Total: {{number_format(Session('cart')->totalPrice)}} VND
+          @else
+          Total: 0 VND
+          @endif
         </div>
 
         <div class="header-cart-buttons flex-w w-full">
@@ -81,3 +67,4 @@
     </div>
   </div>
 </div>
+

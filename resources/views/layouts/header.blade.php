@@ -13,17 +13,10 @@
             Help & FAQs
           </a>
 
-          <a href="#" class="flex-c-m trans-04 p-lr-25">
+          <a href="user" class="flex-c-m trans-04 p-lr-25">
             My Account
           </a>
 
-          <a href="#" class="flex-c-m trans-04 p-lr-25">
-            EN
-          </a>
-
-          <a href="#" class="flex-c-m trans-04 p-lr-25">
-            USD
-          </a>
         </div>
       </div>
     </div>
@@ -32,7 +25,7 @@
       <nav class="limiter-menu-desktop container">
 
         <!-- Logo desktop -->
-        <a href="#" class="logo">
+        <a href="{{ url('/') }}" class="logo">
           <img src="{{ asset('images/icons/logo-01.png') }}" alt="IMG-LOGO">
         </a>
 
@@ -40,28 +33,13 @@
         <div class="menu-desktop">
           <ul class="main-menu">
             <li class="active-menu">
-              <a href="index.html">Home</a>
+              <a href="{{ url('/') }}">Home</a>
             </li>
 
             <li>
-              <a href="product.html">Shop</a>
+              <a href="{{route('listproduct')}}">Shop</a>
             </li>
 
-            <li class="label1" data-label1="hot">
-              <a href="shoping-cart.html">Features</a>
-            </li>
-
-            <li>
-              <a href="blog.html">Blog</a>
-            </li>
-
-            <li>
-              <a href="about.html">About</a>
-            </li>
-
-            <li>
-              <a href="contact.html">Contact</a>
-            </li>
           </ul>
         </div>
 
@@ -71,7 +49,12 @@
             <i class="zmdi zmdi-search"></i>
           </div>
 
-          <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+          <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify=" 
+          @if(Session::has('cart')) {{Session('cart')->totalQty}}
+          @else 0
+          @endif" id="total_quantity_cart">
+
+
             <i class="zmdi zmdi-shopping-cart"></i>
           </div>
 
@@ -96,7 +79,11 @@
         <i class="zmdi zmdi-search"></i>
       </div>
 
-      <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+      <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="
+      @if(Session::has('cart')) {{Session('cart')->totalQty}}
+      @else 0
+      @endif
+      ">
         <i class="zmdi zmdi-shopping-cart"></i>
       </div>
 
@@ -186,11 +173,12 @@
         <img src="{{ asset('images/icons/icon-close2.png') }}" alt="CLOSE">
       </button>
 
-      <form class="wrap-search-header flex-w p-l-15">
-        <button class="flex-c-m trans-04">
+      <form action="{{ action('ProductsController@search') }}" method="get" class="wrap-search-header flex-w p-l-15">
+        {{ csrf_field() }}
+        <button type="submit" class="flex-c-m trans-04">
           <i class="zmdi zmdi-search"></i>
         </button>
-        <input class="plh3" type="text" name="search" placeholder="Search...">
+        <input class="plh3" type="text" name="keyword" placeholder="Search...">
       </form>
     </div>
   </div>

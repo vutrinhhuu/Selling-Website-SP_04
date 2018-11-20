@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderDetail extends Model
 {
-    public function order()
-    {
-      return $this->belongsTo(Order::class);
-    }
+	protected $table = "order_details";
 
-    public function product()
-    {
-      return $this->belongsTo('App\Product', 'product_id', 'id');
-    }
+  public function order()
+  {
+    return $this->belongsTo(Order::class);
+  }
+
+  public function product()
+  {
+    return $this->belongsTo(Product::class);
+  }
 }

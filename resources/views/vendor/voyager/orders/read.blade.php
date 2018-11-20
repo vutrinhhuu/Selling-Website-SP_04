@@ -66,10 +66,10 @@
                                                 {{ $item->quantity }}
                                             </th>
                                             <th>
-                                                {{ $item->sold_price." đ" }}
+                                                {{ $item->sold_price." VND" }}
                                             </th>
                                             <th>
-                                                {{ $item->sold_price * $item->quantity." đ" }}
+                                                {{ $item->sold_price * $item->quantity." VND" }}
                                             </th>
                                         </tr>
                                 @endforeach
