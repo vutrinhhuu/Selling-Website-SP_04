@@ -55,7 +55,7 @@ class ProductsController extends Controller
 
     $categories = Category::all();
 
-    return view('product.shop', compact('products','categories','keyword'));
+    return view('product.shop', compact('products','categories'));
   }
 }
 ?>

@@ -173,7 +173,7 @@
         <img src="{{ asset('images/icons/icon-close2.png') }}" alt="CLOSE">
       </button>
 
-      <form action="search" method="get" class="wrap-search-header flex-w p-l-15">
+      <form action="{{ action('ProductsController@search') }}" method="get" class="wrap-search-header flex-w p-l-15">
         {{ csrf_field() }}
         <button type="submit" class="flex-c-m trans-04">
           <i class="zmdi zmdi-search"></i>
