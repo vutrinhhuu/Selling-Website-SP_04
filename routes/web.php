@@ -43,6 +43,10 @@ Route::get('add-to-cart/{id}/{id_size_color}/{num_product}',[
 	'uses'=>'CartController@getAddToCart'
 ]);
 
+Route::get('user/{userId}', 'UserController@getProfilePage');
+
+Route::get('user/order/{orderId}', 'UserController@getOrderDetail');
+
 Route::get('delete-car/{id_size_color}',[
 	'as'=>'deletecart',
 	'uses'=>'CartController@getDelItemCart'
