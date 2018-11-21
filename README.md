@@ -2,8 +2,8 @@
 
 ## System Requirement
 ```bash
-PHP >= 7.2.10
-Apache >= 2.4.34
+PHP ≥ 7.2.10
+Apache ≥ 2.4.34
 Mysql 5.7+
 Composer 1.7.2
 ```
