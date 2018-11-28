@@ -51,3 +51,7 @@ Route::get('delete-car/{id_size_color}',[
 	'as'=>'deletecart',
 	'uses'=>'CartController@getDelItemCart'
 ]);
+
+Route::view('checkout', 'cart.checkout');
+
+Route::view('cart', 'cart.show');

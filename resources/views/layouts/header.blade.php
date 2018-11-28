@@ -1,4 +1,4 @@
-<header>
+<header class="header-v4">
   <!-- Header desktop -->
   <div class="container-menu-desktop">
     <!-- Topbar -->
@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="wrap-menu-desktop">
+    <div class="wrap-menu-desktop how-shadow1">
       <nav class="limiter-menu-desktop container">
 
         <!-- Logo desktop -->
