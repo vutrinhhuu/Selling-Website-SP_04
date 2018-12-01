@@ -11,7 +11,7 @@
   @include('layouts.banner')
 
   <!-- Product -->
-  @include('layouts.product')
+  @include('product.list_products')
 
 @endsection
 
