@@ -38,7 +38,7 @@
 										
 										<div>
 											<!-- City / Province -->
-											<label for="checkout_city">City/Town*</label>
+											<label for="checkout_city">City*</label>
 											<select name="province_city" id="checkout_city" class="dropdown_item_select checkout_input" require="required">
 												<option></option>
 												<option value="1">City 1</option>
@@ -50,7 +50,7 @@
 
 										<div>
 											<!-- Country -->
-											<label for="checkout_country">Country*</label>
+											<label for="checkout_country">District*</label>
 											<select name="country_district" id="checkout_country" class="dropdown_item_select checkout_input" require="required">
 												<option></option>
 												<option value="1">Lithuania</option>
@@ -62,7 +62,7 @@
 									
 										<div>
 											<!-- Ward -->
-											<label for="checkout_province">Province*</label>
+											<label for="checkout_province">Commune*</label>
 											<select name="commune" id="checkout_province" class="dropdown_item_select checkout_input" require="required">
 												<option></option>
 												<option value="1"> Ward 1</option>
