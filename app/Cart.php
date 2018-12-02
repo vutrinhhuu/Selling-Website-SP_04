@@ -18,12 +18,13 @@ class Cart
 		}
 	}
 
-	//add one product
-	public function add($item, $id_size_color, $amount){//$item :$product ,$id:$product_id
+	
+	//add more than one product
+	public function addWithAmount($item, $id,$id_size_color, $amount){
 		$size_color = SizeColors::where('id',$id_size_color)->first();
 		
-		if($item->promotion_price == 0){
-			$giohang = ['size_color'=>$size_color,'qty'=>0, 'price' => $item->unit_price, 'item' => $item];
+		if($item->promotion_price == $item->unit_price){
+			$giohang = ['size_color'=>$size_color, 'qty'=>0, 'price' => $item->unit_price, 'item' => $item];
 		}
 		else{
 			$giohang = ['size_color'=>$size_color, 'qty'=>0, 'price' => $item->promotion_price, 'item' => $item];
@@ -33,31 +34,63 @@ class Cart
 				$giohang = $this->items[$id_size_color];
 			}
 		}
-		$giohang['qty']++;
-		if($item->promotion_price == 0){
+		$giohang['qty']+= $amount;
+		if($item->promotion_price == $item->unit_price){
 			$giohang['price'] = $item->unit_price * $giohang['qty'];
 		}
 		else{
 			$giohang['price'] = $item->promotion_price * $giohang['qty'];
 		}
 		$this->items[$id_size_color] = $giohang;
-		$this->totalQty++;
-		if($item->promotion_price == 0){
-			$this->totalPrice += $item->unit_price;
+
+		$this->totalQty+= $amount;
+		if($item->promotion_price == $item->unit_price){
+			$this->totalPrice+= $item->unit_price * $amount;
 		}
 		else{
-			$this->totalPrice += $item->promotion_price;
+			$this->totalPrice+= $item->promotion_price * $amount;
 		}
 		
 	}
+	
 
-	//add more than one product
-	public function addWithAmount($item, $id,$id_size_color, $amount){
-		
-
+	//remove more than one product
+	public function removeWithAmount($item, $id,$id_size_color, $amount){
 		$size_color = SizeColors::where('id',$id_size_color)->first();
 		
+		if($item->promotion_price == $item->unit_price){
+			$giohang = ['size_color'=>$size_color, 'qty'=>0, 'price' => $item->unit_price, 'item' => $item];
+		}
+		else{
+			$giohang = ['size_color'=>$size_color, 'qty'=>0, 'price' => $item->promotion_price, 'item' => $item];
+		}
+		if($this->items){
+			if(array_key_exists($id_size_color, $this->items)){
+				$giohang = $this->items[$id_size_color];
+			}
+		}
+		$giohang['qty']-= $amount;
+		if($item->promotion_price == $item->unit_price){
+			$giohang['price'] = $item->unit_price * $giohang['qty'];
+		}
+		else{
+			$giohang['price'] = $item->promotion_price * $giohang['qty'];
+		}
+		$this->items[$id_size_color] = $giohang;
 
+		$this->totalQty-= $amount;
+		if($item->promotion_price == $item->unit_price){
+			$this->totalPrice-= $item->unit_price * $amount;
+		}
+		else{
+			$this->totalPrice-= $item->promotion_price * $amount;
+		}
+		
+		
+	}
+	
+	public function UpdateAmount($item, $id,$id_size_color, $amount){
+		$size_color = SizeColors::where('id',$id_size_color)->first();
 
 		if($item->promotion_price == $item->unit_price){
 			$giohang = ['size_color'=>$size_color, 'qty'=>0, 'price' => $item->unit_price, 'item' => $item];
@@ -70,7 +103,9 @@ class Cart
 				$giohang = $this->items[$id_size_color];
 			}
 		}
-		$giohang['qty']+=$amount;
+		$old_amount = $giohang['qty'];
+		$giohang['qty'] = $amount;
+
 		if($item->promotion_price == $item->unit_price){
 			$giohang['price'] = $item->unit_price * $giohang['qty'];
 		}
@@ -79,17 +114,23 @@ class Cart
 		}
 		$this->items[$id_size_color] = $giohang;
 
-		$this->totalQty+=$amount;
+		$this->totalQty+= $amount - $old_amount;
 		if($item->promotion_price == $item->unit_price){
-			$this->totalPrice += $item->unit_price * $giohang['qty'];
+			$this->totalPrice+= $item->unit_price * ($amount-$old_amount);
 		}
 		else{
-			$this->totalPrice += $item->promotion_price * $giohang['qty'];
+			$this->totalPrice+= $item->promotion_price * ($amount-$old_amount);
 		}
 		
 	}
 	
-	
+	//xóa nhiều
+	public function removeItem($id){
+		$this->totalQty -= $this->items[$id]['qty'];
+		$this->totalPrice -= $this->items[$id]['price'];
+		unset($this->items[$id]);
+	}
+
 	//xóa 1
 	public function reduceByOne($id){
 		$this->items[$id]['qty']--;
@@ -100,10 +141,9 @@ class Cart
 			unset($this->items[$id]);
 		}
 	}
-	//xóa nhiều
-	public function removeItem($id){
-		$this->totalQty -= $this->items[$id]['qty'];
-		$this->totalPrice -= $this->items[$id]['price'];
-		unset($this->items[$id]);
-	}
+
+
+
+
+
 }

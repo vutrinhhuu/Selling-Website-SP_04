@@ -24,6 +24,32 @@ class CartController extends Controller
     return view('layouts.cart');
   }
 
+
+  public function getUpdateAmountCart(Request $req,$id,$id_size_color,$num_product){
+
+    $product = Product::find($id);
+    $oldCart = Session::get('cart')?Session::get('cart'):null;
+    $cart = new Cart($oldCart);
+
+    $cart->UpdateAmount($product,$id,$id_size_color,$num_product);
+    $req->session()->put('cart',$cart);
+    
+    return view('layouts.cart');
+  }
+
+  public function getRemoveFromCart(Request $req,$id,$id_size_color,$num_product){
+
+    $product = Product::find($id);
+    $oldCart = Session::get('cart')?Session::get('cart'):null;
+    $cart = new Cart($oldCart);
+
+    $cart->removeWithAmount($product,$id,$id_size_color,$num_product);
+    $req->session()->put('cart',$cart);
+    
+    return view('layouts.cart');
+  }
+
+
   public function getDelItemCart($id){
     $oldCart = Session::get('cart')?Session::get('cart'):null;
     $cart = new Cart($oldCart);
@@ -37,15 +63,14 @@ class CartController extends Controller
     return redirect()->back();
   }
 
-  public function showCart(){
-    //TODO
+   public function viewCart(){
     return view('cart.show');
   }
 
-  public function checkout(){
-    //TODO
+  public function checkOut(){
     return view('cart.checkout');
   }
 }
-
+ 
 ?>
+ 

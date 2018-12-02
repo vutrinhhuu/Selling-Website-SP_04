@@ -2995,6 +2995,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .how-itemcart1:hover:after {
   opacity: 1;
+  pointer-events: none;
 }
 
 /*---------------------------------------------*/
