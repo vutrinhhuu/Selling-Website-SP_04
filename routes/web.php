@@ -45,13 +45,23 @@ Route::get('add-to-cart/{id}/{id_size_color}/{num_product}',[
 	'uses'=>'CartController@getAddToCart'
 ]);
 
-Route::get('user/{userId}', 'UserController@getUser');
+Route::get('user/{userId}', 'UserController@getUser')->name('user');
 
 Route::get('delete-car/{id_size_color}',[
 	'as'=>'deletecart',
 	'uses'=>'CartController@getDelItemCart'
 ]);
 
-Route::view('checkout', 'cart.checkout');
 
-Route::view('cart', 'cart.show');
+//TO DO
+Route::get('checkout', 'CartController@checkout');
+
+Route::get('cart', 'CartController@showCart');
+
+
+$namespacePrefix = '\\'.config('voyager.controllers.namespace').'\\';
+
+Route::get('login', ['uses' => $namespacePrefix.'VoyagerAuthController@login',     'as' => 'login']);
+Route::post('login', ['uses' => $namespacePrefix.'VoyagerAuthController@postLogin', 'as' => 'postlogin']);
+
+Route::post('logout', ['uses' => $namespacePrefix.'VoyagerController@logout',  'as' => 'logout']);

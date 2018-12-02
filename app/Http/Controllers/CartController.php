@@ -36,6 +36,16 @@ class CartController extends Controller
     }
     return redirect()->back();
   }
+
+  public function showCart(){
+    //TODO
+    return view('cart.show');
+  }
+
+  public function checkout(){
+    //TODO
+    return view('cart.checkout');
+  }
 }
 
 ?>

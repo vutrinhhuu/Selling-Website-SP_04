@@ -1,4 +1,4 @@
-<header class="header-v4">
+<header class="header">
   <!-- Header desktop -->
   <div class="container-menu-desktop">
     <!-- Topbar -->
@@ -13,9 +13,45 @@
             Help & FAQs
           </a>
 
-          <a href="user" class="flex-c-m trans-04 p-lr-25">
+          {{-- <a href="user" class="flex-c-m trans-04 p-lr-25">
             My Account
-          </a>
+          </a> --}}
+          @if (Auth::check())
+            @php
+              $user = Auth::user();
+            @endphp
+            <div class="dropdown show">
+              <a class="flex-c-m trans-04 p-lr-25 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-circle"></i>
+                &nbsp;&nbsp;My Account
+              </a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{{ route('user', $user->id) }}">My Profile</a>
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                  Log out
+                </a>
+                {{-- Form to logout --}}
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+
+              </div>
+            </div>
+
+          @else
+            <div class="dropdown show">
+              <a class="flex-c-m trans-04 p-lr-25 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Account
+              </a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href=" {{ route('login') }} ">Log in</a>
+                <a class="dropdown-item" href="#">Sign up</a>
+              </div>
+            </div>
+          @endif
 
         </div>
       </div>
