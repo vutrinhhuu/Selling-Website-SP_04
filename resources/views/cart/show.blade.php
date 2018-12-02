@@ -3,15 +3,9 @@
 @section('content')
     @include('layouts.cart')
 
-        @if(Session::has('cart'))
-        <?php
-          echo '<script>';
-          echo 'console.log('. json_encode( $product_cart ) .')';
-          echo '</script>';
-        ?>
-        @endif
-    <!-- breadcrumb -->
-    <div class="container">
+   
+     <!-- breadcrumb -->
+    <div class="container" style="padding-top: 100px">
         <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
             <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
                 Home
@@ -23,11 +17,11 @@
             </span>
         </div>
     </div>
-   
-   
-        
+
     <!-- Shoping Cart -->
     <form class="bg0 p-t-75 p-b-85">
+   
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -177,7 +171,11 @@
 
                             <div class="size-209 p-t-1">
                                 <span class="mtext-110 cl2">
-                                  $100
+                                   @if(Session::has('cart'))
+                                        {{number_format(Session('cart')->totalPrice)}} VND
+                                    @else
+                                        0 VND
+                                    @endif
                                 </span>
                             </div>
                         </div>
