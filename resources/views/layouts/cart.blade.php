@@ -18,12 +18,7 @@
 
 
         @if(Session::has('cart'))
-        <?php
-          echo '<script>';
-          echo 'console.log('. json_encode( $product_cart ) .')';
-          echo '</script>';
-        ?>
-        
+       
            @foreach($product_cart as $key=> $product)
             <li class="header-cart-item flex-w flex-t m-b-12">
               <div class="header-cart-item-img">
@@ -55,11 +50,12 @@
         </div>
 
         <div class="header-cart-buttons flex-w w-full">
-        <a href="{{ url('/cart') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+
+          <a href="{{route('viewcart')}}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
             View Cart
           </a>
+          <a href="{{route('viewcart')}}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
 
-        <a href="{{ url('/checkout') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
             Check Out
           </a>
         </div>
