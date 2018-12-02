@@ -53,15 +53,6 @@ Route::get('remove-from-cart/{id}/{id_size_color}/{num_product}',[
 	'uses'=>'CartController@getRemoveFromCart'
 ]);
 
-		
-Route::get('update-amount-cart/{id}/{id_size_color}/{num_product}',[
-	'as'=>'updateamountcart',
-	'uses'=>'CartController@getUpdateAmountCart'
-]);
-
-Route::get('user/{userId}', 'UserController@getUser');
-
-
 Route::get('delete-car/{id_size_color}',[
 	'as'=>'deletecart',
 	'uses'=>'CartController@getDelItemCart'
@@ -76,13 +67,18 @@ Route::post('login', ['uses' => $namespacePrefix.'VoyagerAuthController@postLogi
 
 Route::post('logout', ['uses' => $namespacePrefix.'VoyagerController@logout',  'as' => 'logout']);
 
+
 Route::get('/cart',[
 	'as'=> 'viewcart',
 	'uses'=>'CartController@viewCart'
 ]);
 
-Route::get('/checkout',[
+Route::post('/checkout',[
 	'as' => 'checkout',
-	'uses' => 'CartController@checkOut'
+	'uses' => 'CartController@postCheckOut'
 ]);
 
+Route::get('/checkout',[
+	'as' => 'checkout',
+	'uses' => 'CartController@getCheckOut'
+]);
