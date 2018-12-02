@@ -82,3 +82,4 @@ Route::get('/checkout',[
 	'as' => 'checkout',
 	'uses' => 'CartController@getCheckOut'
 ]);
+

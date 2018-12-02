@@ -77,6 +77,10 @@ class CartController extends Controller
     return view('cart.checkout');
   }
 
+  public function getCheckOut2(){
+    return view('cart.test');
+  }
+
   public function postCheckOut(Request $req){ 
     if (Auth::check() ){
       $user = Auth::user();
