@@ -10,15 +10,18 @@ Composer 1.7.2
 
 ## Installation
 
-```bash
-composer install
-```
 ### 1. Create a new database and add your database credentials to your .env file:
 
 ```bash
 cp .env.example .env
 ```
+
+In your .env file, change APP_URL and config your databases
 ```bash
+APP_URL=http://localhost:8000
+.
+.
+.
 DB_HOST=localhost
 DB_DATABASE=homestead
 DB_USERNAME=homestead
@@ -29,10 +32,10 @@ DB_PASSWORD=secret
 php artisan key:generate
 ```
 
-### 2. Run install voyager admin
+### 2. Run composer install
 
 ```bash
-php artisan voyager:install
+composer install
 ```
 
 ### 3. Import .sql file
