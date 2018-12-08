@@ -6,6 +6,7 @@ use App\Cart;
 use App\Order;
 use App\OrderDetail;
 use App\DeliverAddress;
+use App\ShippingFees;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -74,7 +75,8 @@ class CartController extends Controller
   }
 
   public function getCheckOut(){
-    return view('cart.checkout');
+    $shipping_fees = ShippingFees::all();
+    return view('cart.checkout',compact('shipping_fees'));
   }
 
   public function postCheckOut(Request $req){ 
@@ -84,11 +86,14 @@ class CartController extends Controller
 
     $cart = Session::get('cart');
 
+    $shipping_fee = ShippingFees::Where('id',$req->province_city)->first()->shipping_fee;
+
     $order = new Order;
     $order->note = $req->note;
-    $order->total = $cart->totalPrice;
-    $order->order_day = date('Y-m-d');
-     
+    $order->total = $cart->totalPrice + $shipping_fee;
+    $order->shipping_fee = $shipping_fee;
+
+    $order->order_day = date('Y-m-d'); 
     $order->user_id = $user->id; 
     $order->name_receiver = $req->name_receiver;
     $order->phone_receiver = $req->phone_receiver;

@@ -39,12 +39,11 @@
 										<div>
 											<!-- City / Province -->
 											<label for="checkout_city">City*</label>
-											<select name="province_city" id="checkout_city" class="dropdown_item_select checkout_input" require="required">
+											<select name="province_city" id="checkout_city" class="dropdown_item_select checkout_input" require="required" onchange="populate(this.id,'shipping_fee','totalPay','totalPayInput')">
 												<option></option>
-												<option value="1">City 1</option>
-												<option value="2">City 2</option>
-												<option value="3">City 3</option>
-												<option value="4">City 4</option>
+												 @foreach($shipping_fees as $province_city)	
+												<option value="{{$province_city->id}}">{{$province_city->province_city}}</option>
+												@endforeach
 											</select>
 										</div>
 
@@ -108,11 +107,12 @@
 														</li>
 														<li class="d-flex flex-row align-items-center justify-content-start">
 															<div class="cart_extra_total_title">Shipping</div>
-															<div class="cart_extra_total_value ml-auto">Free</div>
+															<div class="cart_extra_total_value ml-auto" id ="shipping_fee">Free</div>
 														</li>
 														<li class="d-flex flex-row align-items-center justify-content-start">
 															<div class="cart_extra_total_title">Total</div>
-															<div class="cart_extra_total_value ml-auto">
+															<div class="cart_extra_total_value ml-auto" id="totalPay">
+																<input type="hidden" name="totalPayInput" value="0" id="totalPayInput">
 																@if(Session::has('cart'))
 							                                        {{number_format(Session('cart')->totalPrice)}} VND
 							                                    @else
@@ -179,6 +179,35 @@
 		<script src="{{ asset('checkout_style/plugins/easing/easing.js') }}"></script>
 		<script src="{{ asset('checkout_style/plugins/parallax-js-master/parallax.min.js') }}"></script>
 		<script src="{{ asset('checkout_style/js/checkout.js') }}"></script>
+				
+		<script>
+		  function populate(s1,s2,s3,s4){
+		    var s1 = document.getElementById(s1);
+		    var s2 = document.getElementById(s2);
+		    var s3 = document.getElementById(s3);
+		    var s4 = document.getElementById('totalPayInput');
+
+		    var totalPrice = '<?php echo (Session::has('cart'))?Session('cart')->totalPrice : 0;?>';
+		    var shipping_fee = 0;
+
+		    //pass PHP variable to JS
+		    var datas = <?php echo json_encode($shipping_fees); ?>;
+		    for(i = 0 ;i< datas.length;i++){
+		    	if(datas[i].id == s1.value){
+		    		shipping_fee = datas[i].shipping_fee;
+		    		break;
+		    	}
+		    }
+		    totalPay = parseInt(totalPrice) + parseInt(shipping_fee);
+
+		    s2.innerHTML = numberWithCommas(shipping_fee) + " VND";
+		    s3.innerHTML =  numberWithCommas(totalPay) +" VND";
+
+		}
+		function numberWithCommas(x) {
+    		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+		</script>
 	@endsection
 
 @endsection
