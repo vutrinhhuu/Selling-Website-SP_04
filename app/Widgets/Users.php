@@ -22,7 +22,7 @@ class Users extends BaseDimmer
      */
     public function run()
     {
-        $count = \App\User::count();
+        $count = \App\User::count() - 1;
         $string = trans_choice('voyager::dimmer.user', $count);
 
         return view('voyager::dimmer', array_merge($this->config, [

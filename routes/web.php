@@ -64,4 +64,4 @@ $namespacePrefix = '\\'.config('voyager.controllers.namespace').'\\';
 Route::get('login', ['uses' => $namespacePrefix.'VoyagerAuthController@login',     'as' => 'login']);
 Route::post('login', ['uses' => $namespacePrefix.'VoyagerAuthController@postLogin', 'as' => 'postlogin']);
 
-Route::post('logout', ['uses' => $namespacePrefix.'VoyagerController@logout',  'as' => 'logout']);
+Route::post('logout', ['uses' => 'AuthController@logout',  'as' => 'logout']);

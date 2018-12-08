@@ -160,7 +160,7 @@ return [
         ],
 
         'widgets' => [
-            // 'App\\Widgets\\Users',
+            'App\\Widgets\\Users',
             'App\\Widgets\\Categories',
             'App\\Widgets\\Products',
             'App\\Widgets\\Orders',

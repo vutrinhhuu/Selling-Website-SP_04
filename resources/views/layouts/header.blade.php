@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header-v4">
   <!-- Header desktop -->
   <div class="container-menu-desktop">
     <!-- Topbar -->
@@ -20,6 +20,12 @@
             @php
               $user = Auth::user();
             @endphp
+            @if ($user->role->name == 'admin')
+              <a class="flex-c-m trans-04 p-lr-25" href="{{ route('voyager.dashboard') }}"> 
+                <i class="fa fa-lock"></i>
+                &nbsp;&nbsp;Admin Dashboard
+              </a>
+            @endif
             <div class="dropdown show">
               <a class="flex-c-m trans-04 p-lr-25 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-user-circle"></i>
