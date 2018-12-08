@@ -255,6 +255,7 @@ for (i = 0; i < sizes.length; i++) {
     alert("Not have enough product");
     return;
   }
+  
   if(typeof id_size_color == "undefined"){
     alert("Please choose size and color");
     return;
@@ -271,7 +272,7 @@ for (i = 0; i < sizes.length; i++) {
     }
   });
 
-     var total_quantity_cart = 
+  var total_quantity_cart = 
       <?php 
       if(Session::has('cart') ) {
         echo Session('cart')->totalQty;
@@ -279,7 +280,7 @@ for (i = 0; i < sizes.length; i++) {
       else echo 0;
       ?>;;
       console.log(total_quantity_cart);
-      $('#total_quantity_cart').attr("data-notify","+"+num_product);
+  $('#total_quantity_cart').attr("data-notify","+"+num_product);
 
   var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();  
   swal(nameProduct, "is added to cart !", "success"); 
