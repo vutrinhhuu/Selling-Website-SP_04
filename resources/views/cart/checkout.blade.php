@@ -50,18 +50,14 @@
 											</select>
 										</div>
 
+	
+										
 										<div>
-											<!-- Country -->
+											<!-- District -->
 											<label for="checkout_country">District*</label>
-											<select name="country_district" id="checkout_country" class="dropdown_item_select checkout_input" require="required">
-												<option></option>
-												<option value="1">Lithuania</option>
-												<option value="2">Sweden</option>
-												<option value="3">UK</option>
-												<option value="4">Italy</option>
-											</select>
+											<input name="country_district" type="text" id="checkout_country" class="checkout_input" required="required">
 										</div>
-									
+
 
 										<div>
 											<!-- Details Address -->
