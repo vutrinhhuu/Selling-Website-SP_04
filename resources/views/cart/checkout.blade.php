@@ -128,7 +128,7 @@
 												</div>
 
 												<!-- Order Text -->
-												<div class="order_text">somethings</div>
+												<div class="order_text"></div>
 
 												<div >
 												<button type="submit" href="#" class="checkout_button trans_200">PLACE ORDER</button>

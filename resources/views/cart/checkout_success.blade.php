@@ -1,9 +1,11 @@
-<h1>CHECK OUT SUCESSFULL</h1>
-  <div class="header-cart-buttons flex-w w-full">
- <a href="{{ url('/') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-            Continue to shopping
-          </a>
-   <a href="{{route('checkout')}}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-            Go to manage orders
-             </a>
-         </div>
+@extends('layouts.master')
+
+@section('content')
+
+<div class="container" style="padding-top: 100px;padding-bottom: 200px">
+  	<h2 style="color:red;" >Thank you for shopping with us!</h2>
+  	<h6>You can check your orders at <a href="#">my orders</a></h6>
+
+</div>
+
+@endsection

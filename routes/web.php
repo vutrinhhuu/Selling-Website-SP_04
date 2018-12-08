@@ -53,11 +53,17 @@ Route::get('remove-from-cart/{id}/{id_size_color}/{num_product}',[
 	'uses'=>'CartController@getRemoveFromCart'
 ]);
 
+		
+Route::get('update-amount-cart/{id}/{id_size_color}/{num_product}',[
+	'as'=>'updateamountcart',
+	'uses'=>'CartController@getUpdateAmountCart'
+]);
+
+
 Route::get('delete-car/{id_size_color}',[
 	'as'=>'deletecart',
 	'uses'=>'CartController@getDelItemCart'
 ]);
-
 
 
 $namespacePrefix = '\\'.config('voyager.controllers.namespace').'\\';

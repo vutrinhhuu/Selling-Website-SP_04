@@ -16,11 +16,8 @@
             </span>
         </div>
     </div>
-
     <!-- Shoping Cart -->
     <form class="bg0 p-t-75 p-b-85">
-   
-
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -55,6 +52,7 @@
                                     </td>
                                     <td class="column-4">
                                         <div class="wrap-num-product flex-w m-l-auto m-r-0">
+                                            <input id="db_num_product" style="display: none;" value="{{$product['size_color']['quantity']}}">
                                             <input id="id_size_color" style="display: none;" value="{{$product['size_color']['id']}}">
                                             <input id="product_id" style="display: none;" value="{{$product['item']['id']}}">
 
@@ -116,11 +114,12 @@
                                 </span>
                             </div>
                         </div>
-                        
+                   
+                    
                         @if (Auth::user())
                          <a href="{{route('checkout')}}" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> Proceed to Checkout</a>
                         @else
-                         <a href = "#" class=" no-user-loggined flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> Proceed to Checkout</a>
+                         <a href="#" class=" no-user-loggined flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> Proceed to Checkout</button>
                         @endif
                         
                     </div>
@@ -141,29 +140,40 @@
         var num_product = 1;
         var product_id = Number($(this).prev().prev().prev().val());
         var id_size_color = Number($(this).prev().prev().prev().prev().val());
-        var current_amount = '{{$product['qty']}}';
+        var current_amount = Number($(this).prev().val());
+        var db_num_product = Number($(this).prev().prev().prev().prev().prev().val());
         
-        
-        url_add_to_cart = '/add-to-cart/'+product_id+'/'+id_size_color+'/'+num_product;
-          //update cart and total quantity in cart
-       
-        $.ajax({
-            data: {},
-            url:url_add_to_cart,
-            success: function(result){
-              location.reload();
-            }
-        });
+        if(current_amount  <= 0){
+            swal("amount should be more than 0","Please choose again","error");
+        }else if(current_amount > db_num_product){
+             swal("not enough product","Just has "+db_num_product+" this product","info");
+        }else{
+            
+            url_add_to_cart = '/add-to-cart/'+product_id+'/'+id_size_color+'/'+num_product;
+              //update cart and total quantity in cart
+           
+            $.ajax({
+                data: {},
+                url:url_add_to_cart,
+                success: function(result){
+                  location.reload();
+                }
+            });
+        }
     });
 
     $(document).on('change','.update_product_amount',function(){
         var num_product = Number($(this).val());
         var product_id = Number($(this).prev().prev().val());
         var id_size_color = Number($(this).prev().prev().prev().val());
+        var db_num_product = Number($(this).prev().prev().prev().prev().val());
         
-
-
-        update_amount_cart = '/update-amount-cart/'+product_id+'/'+id_size_color+'/'+num_product;
+        if(num_product  <= 0){
+            swal("amount should be more than 0","Please choose again","error");
+        }else if(num_product >db_num_product){
+           swal("not enough product","Just has "+db_num_product+" this product","info");
+        }else{
+            update_amount_cart = '/update-amount-cart/'+product_id+'/'+id_size_color+'/'+num_product;
           //update cart and total quantity in cart
          
         $.ajax({
@@ -173,24 +183,33 @@
               location.reload();
             }
         });
+        }
+        
     });
 
     $(document).on('click', '.calculate-total-down',function(){
         var num_product = 1;
         var product_id = Number($(this).prev().val());
         var id_size_color = Number($(this).prev().prev().val());
-
-        url_remove_from_cart = '/remove-from-cart/'+product_id+'/'+id_size_color+'/'+num_product;
-          //update cart and total quantity in cart
-       
-        $.ajax({
-            data: {},
-            url:url_remove_from_cart,
-            success: function(result){
-              location.reload();
-            }
-        });
-
+        var current_amount = Number($(this).next().val());
+        var db_num_product = Number($(this).prev().prev().prev().val());
+        
+        if(current_amount  <= 0){
+            swal("amount should be more than 0","Please choose again","error");
+        }else if(current_amount > db_num_product){
+            swal("not enough product","Just has "+db_num_product+" this product","info");
+        }else{
+            url_remove_from_cart = '/remove-from-cart/'+product_id+'/'+id_size_color+'/'+num_product;
+              //update cart and total quantity in cart
+            console.log(url_remove_from_cart);
+            $.ajax({
+                data: {},
+                url:url_remove_from_cart,
+                success: function(result){
+                  location.reload();
+                }
+            });
+        }
     });
 
  </script>
