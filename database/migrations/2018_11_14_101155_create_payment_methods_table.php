@@ -13,6 +13,7 @@ class CreatePaymentMethodsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('payment_methods');
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 200)->nullable(false);
