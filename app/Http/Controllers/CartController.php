@@ -7,6 +7,8 @@ use App\Order;
 use App\OrderDetail;
 use App\DeliverAddress;
 use App\ShippingFees;
+use App\PaymentMethod;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -76,7 +78,8 @@ class CartController extends Controller
 
   public function getCheckOut(){
     $shipping_fees = ShippingFees::all();
-    return view('cart.checkout',compact('shipping_fees'));
+    $payment_methods = PaymentMethod::all();
+    return view('cart.checkout',compact('shipping_fees','payment_methods'));
   }
 
   public function postCheckOut(Request $req){ 
@@ -100,28 +103,27 @@ class CartController extends Controller
     $order->payment_method_id = $req->payment_method_id;
     $order->save();
 
+
     foreach($cart->items as $key => $value){
       $order_detail = new OrderDetail;
       $order_detail->quantity = $value['qty'];
       $order_detail->sold_price = $value['item']['promotion_price'];  
       $order_detail->order_id = $order->id;
-      $order_detail->id_size_color = $key;
+      $order_detail->size_color_id = $key;
       $order_detail->save();
     }
     
+
     $deliver_address =  new DeliverAddress;
     $deliver_address->order_id = $order->id;
     $deliver_address->province_city = $req->province_city;
     $deliver_address->county_district = $req->country_district;
-    $deliver_address->commune = $req->commune;
     $deliver_address->other_address_details = $req->other_address_details;
     $deliver_address->save();
 
     //tru so luong trong kho
-
     Session::forget('cart');
-    
-    return redirect()->back()->with("Notification","Order successfull");
+    return view('cart.checkout_success');
   }
 }
  

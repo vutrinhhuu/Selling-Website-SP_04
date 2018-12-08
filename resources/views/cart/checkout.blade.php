@@ -10,9 +10,12 @@
 @endsection
 
 @section('content')
+
 	<!-- Checkout -->
 	<div class="checkout">
 		<div class="section_container">
+
+
 			<div class="container">
 				<div class="p-b-10">
 					<h3 class="ltext-103 cl5">
@@ -59,17 +62,6 @@
 											</select>
 										</div>
 									
-										<div>
-											<!-- Ward -->
-											<label for="checkout_province">Commune*</label>
-											<select name="commune" id="checkout_province" class="dropdown_item_select checkout_input" require="required">
-												<option></option>
-												<option value="1"> Ward 1</option>
-												<option value="2"> Ward 2</option>
-												<option value="3"> Ward 3</option>
-												<option value="4"> Ward 4</option>
-											</select>
-										</div>
 
 										<div>
 											<!-- Details Address -->
@@ -125,24 +117,13 @@
 												<!-- Payment Options -->
 												<div class="payment">
 													<div class="payment_options">
-														<label class="payment_option clearfix">Cash On Delivery
-															<input type="radio" checked="checked" name="payment_method_id" value="1" >
+														 @foreach($payment_methods as $p)	
+														<label class="payment_option clearfix">{{$p->name}}
+															<input type="radio" checked="checked" name="payment_method_id" value="{{$p->id}}" >
 															<span class="checkmark"></span>
 														</label>
-
-														<label class="payment_option clearfix">Paypal
-															<input type="radio" name="payment_method_id" value="2" >
-															<span class="checkmark"></span>
-														</label>
+														@endforeach
 														
-														<label class="payment_option clearfix">Credit card
-															<input type="radio" name="payment_method_id" value="3">
-															<span class="checkmark"></span>
-														</label>
-														<label class="payment_option clearfix">Direct bank transfer
-															<input type="radio"  name="payment_method_id" value="4">
-															<span class="checkmark"></span>
-														</label>
 													</div>
 												</div>
 
