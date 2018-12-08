@@ -1,0 +1,11 @@
+@extends('layouts.master')
+
+@section('content')
+
+<div class="container" style="padding-top: 100px;padding-bottom: 200px">
+  	<h2 style="color:red;" >Thank you for shopping with us!</h2>
+  	<h6>You can check your orders at <a href="#">my orders</a></h6>
+
+</div>
+
+@endsection

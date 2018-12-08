@@ -1,4 +1,4 @@
-@extends('layouts/master')
+@extends('layouts.master')
 
 @section('style')
 	<link rel="stylesheet" type="text/css" href="{{ asset('checkout_style/styles/bootstrap-4.1.3/bootstrap.css') }}">
@@ -12,173 +12,130 @@
 @section('content')
 
 	<!-- Checkout -->
-
 	<div class="checkout">
 		<div class="section_container">
+
+
 			<div class="container">
 				<div class="p-b-10">
 					<h3 class="ltext-103 cl5">
-					</br></br>
 						Checkout
 					</h3>
 				</div>
 				<div class="row">
 					<div class="col">
 						<div class="checkout_container d-flex flex-xxl-row flex-column align-items-start justify-content-start">
-							
 							<!-- Billing -->
 							<div class="billing checkout_box">
 								<div class="checkout_title">Billing Address</div>
 								<div class="checkout_form_container">
-									<form action="#" id="checkout_form" class="checkout_form">
-										<div class="row">
-											<div class="col-lg-6">
+									<form action="{{route('checkout')}}"  method="post" id="checkout_form" class="checkout_form">
+										<input type="hidden" name="_token" value="{{csrf_token()}}">
+
+										
+											<div>
 												<!-- Name -->
-												<label for="checkout_name">First Name*</label>
-												<input type="text" id="checkout_name" class="checkout_input" required="required">
+												<label for="checkout_name">Full Name*</label>
+												<input type="text" id="checkout_name"  name="name_receiver" class="checkout_input" required="required">
 											</div>
-											<div class="col-lg-6">
-												<!-- Last Name -->
-												<label for="checkout_last_name">Last Name*</label>
-												<input type="text" id="checkout_last_name" class="checkout_input" required="required">
-											</div>
-										</div>
+										
 										<div>
-											<!-- Company -->
-											<label for="checkout_company">Company</label>
-											<input type="text" id="checkout_company" class="checkout_input">
-										</div>
-										<div>
-											<!-- Country -->
-											<label for="checkout_country">Country*</label>
-											<select name="checkout_country" id="checkout_country" class="dropdown_item_select checkout_input" require="required">
+											<!-- City / Province -->
+											<label for="checkout_city">City*</label>
+											<select name="province_city" id="checkout_city" class="dropdown_item_select checkout_input" require="required" onchange="populate(this.id,'shipping_fee','totalPay','totalPayInput')">
 												<option></option>
-												<option>Lithuania</option>
-												<option>Sweden</option>
-												<option>UK</option>
-												<option>Italy</option>
+												 @foreach($shipping_fees as $province_city)	
+												<option value="{{$province_city->id}}">{{$province_city->province_city}}</option>
+												@endforeach
 											</select>
 										</div>
+
+	
+										
 										<div>
-											<!-- Address -->
+											<!-- District -->
+											<label for="checkout_country">District*</label>
+											<input name="country_district" type="text" id="checkout_country" class="checkout_input" required="required">
+										</div>
+
+
+										<div>
+											<!-- Details Address -->
 											<label for="checkout_address">Address*</label>
-											<input type="text" id="checkout_address" class="checkout_input" required="required">
-											<input type="text" id="checkout_address_2" class="checkout_input checkout_address_2" required="required">
+											<input name="other_address_details" type="text" id="checkout_address" class="checkout_input" required="required">
 										</div>
-										<div>
-											<!-- Zipcode -->
-											<label for="checkout_zipcode">Zipcode*</label>
-											<input type="text" id="checkout_zipcode" class="checkout_input" required="required">
-										</div>
-										<div>
-											<!-- City / Town -->
-											<label for="checkout_city">City/Town*</label>
-											<select name="checkout_city" id="checkout_city" class="dropdown_item_select checkout_input" require="required">
-												<option></option>
-												<option>City</option>
-												<option>City</option>
-												<option>City</option>
-												<option>City</option>
-											</select>
-										</div>
-										<div>
-											<!-- Province -->
-											<label for="checkout_province">Province*</label>
-											<select name="checkout_province" id="checkout_province" class="dropdown_item_select checkout_input" require="required">
-												<option></option>
-												<option>Province</option>
-												<option>Province</option>
-												<option>Province</option>
-												<option>Province</option>
-											</select>
-										</div>
+					
+										
 										<div>
 											<!-- Phone no -->
 											<label for="checkout_phone">Phone no*</label>
-											<input type="phone" id="checkout_phone" class="checkout_input" required="required">
+											<input type="phone" id="checkout_phone" name="phone_receiver" class="checkout_input" required="required">
 										</div>
+
 										<div>
 											<!-- Email -->
 											<label for="checkout_email">Email Address*</label>
 											<input type="phone" id="checkout_email" class="checkout_input" required="required">
 										</div>
-										<div class="checkout_extra">
-											<ul>
-												<li class="billing_info d-flex flex-row align-items-center justify-content-start">
-													<label class="checkbox_container">
-														<input type="checkbox" id="cb_1" name="billing_checkbox" class="billing_checkbox">
-														<span class="checkbox_mark"></span>
-														<span class="checkbox_text">Terms and conditions</span>
-													</label>
-												</li>
-												<li class="billing_info d-flex flex-row align-items-center justify-content-start">
-													<label class="checkbox_container">
-														<input type="checkbox" id="cb_2" name="billing_checkbox" class="billing_checkbox">
-														<span class="checkbox_mark"></span>
-														<span class="checkbox_text">Create an account</span>
-													</label>
-												</li>
-												<li class="billing_info d-flex flex-row align-items-center justify-content-start">
-													<label class="checkbox_container">
-														<input type="checkbox" id="cb_3" name="billing_checkbox" class="billing_checkbox">
-														<span class="checkbox_mark"></span>
-														<span class="checkbox_text">Subscribe to our newsletter</span>
-													</label>
-												</li>
-											</ul>
+									
+										<!-- Cart Total -->
+										<div class="cart_total">
+											<div class="cart_total_inner checkout_box">
+												<div class="checkout_title">Cart total</div>
+													<ul class="cart_extra_total_list">
+														<li class="d-flex flex-row align-items-center justify-content-start">
+															<div class="cart_extra_total_title">Subtotal</div>
+															<div class="cart_extra_total_value ml-auto">
+																@if(Session::has('cart'))
+							                                        {{number_format(Session('cart')->totalPrice)}} VND
+							                                    @else
+							                                        0 VND
+							                                    @endif
+															</div>
+														</li>
+														<li class="d-flex flex-row align-items-center justify-content-start">
+															<div class="cart_extra_total_title">Shipping</div>
+															<div class="cart_extra_total_value ml-auto" id ="shipping_fee">Free</div>
+														</li>
+														<li class="d-flex flex-row align-items-center justify-content-start">
+															<div class="cart_extra_total_title">Total</div>
+															<div class="cart_extra_total_value ml-auto" id="totalPay">
+																<input type="hidden" name="totalPayInput" value="0" id="totalPayInput">
+																@if(Session::has('cart'))
+							                                        {{number_format(Session('cart')->totalPrice)}} VND
+							                                    @else
+							                                        0 VND
+							                                    @endif
+															</div>
+														</li>
+													</ul>
+
+												<!-- Payment Options -->
+												<div class="payment">
+													<div class="payment_options">
+														 @foreach($payment_methods as $p)	
+														<label class="payment_option clearfix">{{$p->name}}
+															<input type="radio" checked="checked" name="payment_method_id" value="{{$p->id}}" >
+															<span class="checkmark"></span>
+														</label>
+														@endforeach
+														
+													</div>
+												</div>
+
+												<!-- Order Text -->
+												<div class="order_text"></div>
+
+												<div >
+												<button type="submit" href="#" class="checkout_button trans_200">PLACE ORDER</button>
+												</div>
+
+												
+											</div>
 										</div>
 									</form>
 								</div>
 							</div>
-
-							<!-- Cart Total -->
-							<div class="cart_total">
-								<div class="cart_total_inner checkout_box">
-									<div class="checkout_title">Cart total</div>
-									<ul class="cart_extra_total_list">
-										<li class="d-flex flex-row align-items-center justify-content-start">
-											<div class="cart_extra_total_title">Subtotal</div>
-											<div class="cart_extra_total_value ml-auto">$29.90</div>
-										</li>
-										<li class="d-flex flex-row align-items-center justify-content-start">
-											<div class="cart_extra_total_title">Shipping</div>
-											<div class="cart_extra_total_value ml-auto">Free</div>
-										</li>
-										<li class="d-flex flex-row align-items-center justify-content-start">
-											<div class="cart_extra_total_title">Total</div>
-											<div class="cart_extra_total_value ml-auto">$29.90</div>
-										</li>
-									</ul>
-
-									<!-- Payment Options -->
-									<div class="payment">
-										<div class="payment_options">
-											<label class="payment_option clearfix">Paypal
-												<input type="radio" name="radio">
-												<span class="checkmark"></span>
-											</label>
-											<label class="payment_option clearfix">Cach on delivery
-												<input type="radio" name="radio">
-												<span class="checkmark"></span>
-											</label>
-											<label class="payment_option clearfix">Credit card
-												<input type="radio" name="radio">
-												<span class="checkmark"></span>
-											</label>
-											<label class="payment_option clearfix">Direct bank transfer
-												<input type="radio" checked="checked" name="radio">
-												<span class="checkmark"></span>
-											</label>
-										</div>
-									</div>
-
-									<!-- Order Text -->
-									<div class="order_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra temp or so dales. Phasellus sagittis auctor gravida. Integ er bibendum sodales arcu id te mpus. Ut consectetur lacus.</div>
-
-									<div class="checkout_button trans_200"><a href="checkout.html">place order</a></div>
-								</div>
-							</div>
-
 						</div>
 					</div>
 				</div>
@@ -199,6 +156,35 @@
 		<script src="{{ asset('checkout_style/plugins/easing/easing.js') }}"></script>
 		<script src="{{ asset('checkout_style/plugins/parallax-js-master/parallax.min.js') }}"></script>
 		<script src="{{ asset('checkout_style/js/checkout.js') }}"></script>
+				
+		<script>
+		  function populate(s1,s2,s3,s4){
+		    var s1 = document.getElementById(s1);
+		    var s2 = document.getElementById(s2);
+		    var s3 = document.getElementById(s3);
+		    var s4 = document.getElementById('totalPayInput');
+
+		    var totalPrice = '<?php echo (Session::has('cart'))?Session('cart')->totalPrice : 0;?>';
+		    var shipping_fee = 0;
+
+		    //pass PHP variable to JS
+		    var datas = <?php echo json_encode($shipping_fees); ?>;
+		    for(i = 0 ;i< datas.length;i++){
+		    	if(datas[i].id == s1.value){
+		    		shipping_fee = datas[i].shipping_fee;
+		    		break;
+		    	}
+		    }
+		    totalPay = parseInt(totalPrice) + parseInt(shipping_fee);
+
+		    s2.innerHTML = numberWithCommas(shipping_fee) + " VND";
+		    s3.innerHTML =  numberWithCommas(totalPay) +" VND";
+
+		}
+		function numberWithCommas(x) {
+    		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+		</script>
 	@endsection
 
 @endsection

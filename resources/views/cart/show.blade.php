@@ -3,8 +3,8 @@
 @section('content')
     @include('layouts.cart')
 
-    <!-- breadcrumb -->
-    <div class="container">
+     <!-- breadcrumb -->
+    <div class="container" style="padding-top: 100px">
         <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
             <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
                 Home
@@ -16,7 +16,6 @@
             </span>
         </div>
     </div>
-        
     <!-- Shoping Cart -->
     <form class="bg0 p-t-75 p-b-85">
         <div class="container">
@@ -24,7 +23,8 @@
                 <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
                     <div class="m-l-25 m-r--38 m-lr-0-xl">
                         <div class="wrap-table-shopping-cart">
-                            <table class="table-shopping-cart">
+                            <!--LIST PRODUCT IN CART -->
+                            <table class="table-shopping-cart" >
                                 <tr class="table_head">
                                     <th class="column-1">Product</th>
                                     <th class="column-2"></th>
@@ -32,54 +32,46 @@
                                     <th class="column-4">Quantity</th>
                                     <th class="column-5">Total</th>
                                 </tr>
-
-                                <tr class="table_row">
+                                 @if(Session::has('cart'))
+                                    @foreach($product_cart as $key=> $product)           
+                                    <tr class="table_row">
                                     <td class="column-1">
-                                        <div class="how-itemcart1">
-                                            <img src="images/item-cart-04.jpg" alt="IMG">
+                                        <div class="how-itemcart1 ">
+                                             <a href="{{route('deletecart',$key )}}">
+                                            <img src="{{ asset('images/'.$product['item']['representative_image'])}}" alt="IMG"></a>
                                         </div>
                                     </td>
-                                    <td class="column-2">Fresh Strawberries</td>
-                                    <td class="column-3">$ 36.00</td>
+                                    <td class="column-2">
+                                         <a href="{{route('detailsproduct',$product['item']['id'])}}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                                        {{$product['item']['name']}} <br/>
+                                        ({{$product['size_color']['size']}} - {{$product['size_color']['color']}})
+                                        </a>
+                                    </td>
+                                    <td class="column-3">
+                                        {{number_format($product['item']['promotion_price'])}}
+                                    </td>
                                     <td class="column-4">
                                         <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                                <i class="fs-16 zmdi zmdi-minus"></i>
+                                            <input id="db_num_product" style="display: none;" value="{{$product['size_color']['quantity']}}">
+                                            <input id="id_size_color" style="display: none;" value="{{$product['size_color']['id']}}">
+                                            <input id="product_id" style="display: none;" value="{{$product['item']['id']}}">
+
+                                            <div class="btn-num-product-down calculate-total-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                <i class="fs-16 zmdi zmdi-minus"></i>  
                                             </div>
+                                         
+                                            <input class="mtext-104 cl3 txt-center num-product update_product_amount" type="number" name="num-product1" value="{{$product['qty']}}">
 
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
-
-                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                            <div class="btn-num-product-up calculate-total-up cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-plus"></i>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="column-5">$ 36.00</td>
-                                </tr>
-
-                                <tr class="table_row">
-                                    <td class="column-1">
-                                        <div class="how-itemcart1">
-                                            <img src="images/item-cart-05.jpg" alt="IMG">
-                                        </div>
-                                    </td>
-                                    <td class="column-2">Lightweight Jacket</td>
-                                    <td class="column-3">$ 16.00</td>
-                                    <td class="column-4">
-                                        <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                                <i class="fs-16 zmdi zmdi-minus"></i>
-                                            </div>
-
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product2" value="1">
-
-                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                                <i class="fs-16 zmdi zmdi-plus"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="column-5">$ 16.00</td>
-                                </tr>
+                                    <td class="column-5"> {{number_format($product['qty']*$product['item']['promotion_price'])}}</td>
+                                   
+                                    </tr>
+                                    @endforeach
+                                @endif
                             </table>
                         </div>
 
@@ -114,75 +106,110 @@
 
                             <div class="size-209">
                                 <span class="mtext-110 cl2">
-                                    $79.65
+                                     @if(Session::has('cart'))
+                                        {{number_format(Session('cart')->totalPrice)}} VND
+                                    @else
+                                        0 VND
+                                    @endif
                                 </span>
                             </div>
                         </div>
-
-                        <div class="flex-w flex-t bor12 p-t-15 p-b-30">
-                            <div class="size-208 w-full-ssm">
-                                <span class="stext-110 cl2">
-                                    Shipping:
-                                </span>
-                            </div>
-
-                            <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-                                <p class="stext-111 cl6 p-t-2">
-                                    There are no shipping methods available. Please double check your address, or contact us if you need any help.
-                                </p>
-                                
-                                <div class="p-t-15">
-                                    <span class="stext-112 cl8">
-                                        Calculate Shipping
-                                    </span>
-
-                                    <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                                        <select class="js-select2" name="time">
-                                            <option>Select a country...</option>
-                                            <option>USA</option>
-                                            <option>UK</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-
-                                    <div class="bor8 bg0 m-b-12">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="State /  country">
-                                    </div>
-
-                                    <div class="bor8 bg0 m-b-22">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip">
-                                    </div>
-                                    
-                                    <div class="flex-w">
-                                        <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-                                            Update Totals
-                                        </div>
-                                    </div>
-                                        
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex-w flex-t p-t-27 p-b-33">
-                            <div class="size-208">
-                                <span class="mtext-101 cl2">
-                                    Total:
-                                </span>
-                            </div>
-
-                            <div class="size-209 p-t-1">
-                                <span class="mtext-110 cl2">
-                                    $79.65
-                                </span>
-                            </div>
-                        </div>
-
-                        <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                            Proceed to Checkout
-                        </button>
+                   
+                    
+                        @if (Auth::user())
+                         <a href="{{route('checkout')}}" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> Proceed to Checkout</a>
+                        @else
+                         <a href="#" class=" no-user-loggined flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"> Proceed to Checkout</button>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
         </div>
     </form>
 @endsection
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script type="text/javascript">
+    
+    $(document).on('click', '.no-user-loggined', function () {
+        swal("You havent logined yet?", "Login to continue", "error");
+    });  
+
+    $(document).on('click', '.calculate-total-up',function(){
+        var num_product = 1;
+        var product_id = Number($(this).prev().prev().prev().val());
+        var id_size_color = Number($(this).prev().prev().prev().prev().val());
+        var current_amount = Number($(this).prev().val());
+        var db_num_product = Number($(this).prev().prev().prev().prev().prev().val());
+        
+        if(current_amount  <= 0){
+            swal("amount should be more than 0","Please choose again","error");
+        }else if(current_amount > db_num_product){
+             swal("not enough product","Just has "+db_num_product+" this product","info");
+        }else{
+            
+            url_add_to_cart = '/add-to-cart/'+product_id+'/'+id_size_color+'/'+num_product;
+              //update cart and total quantity in cart
+           
+            $.ajax({
+                data: {},
+                url:url_add_to_cart,
+                success: function(result){
+                  location.reload();
+                }
+            });
+        }
+    });
+
+    $(document).on('change','.update_product_amount',function(){
+        var num_product = Number($(this).val());
+        var product_id = Number($(this).prev().prev().val());
+        var id_size_color = Number($(this).prev().prev().prev().val());
+        var db_num_product = Number($(this).prev().prev().prev().prev().val());
+        
+        if(num_product  <= 0){
+            swal("amount should be more than 0","Please choose again","error");
+        }else if(num_product >db_num_product){
+           swal("not enough product","Just has "+db_num_product+" this product","info");
+        }else{
+            update_amount_cart = '/update-amount-cart/'+product_id+'/'+id_size_color+'/'+num_product;
+          //update cart and total quantity in cart
+         
+        $.ajax({
+            data: {},
+            url:update_amount_cart,
+            success: function(result){
+              location.reload();
+            }
+        });
+        }
+        
+    });
+
+    $(document).on('click', '.calculate-total-down',function(){
+        var num_product = 1;
+        var product_id = Number($(this).prev().val());
+        var id_size_color = Number($(this).prev().prev().val());
+        var current_amount = Number($(this).next().val());
+        var db_num_product = Number($(this).prev().prev().prev().val());
+        
+        if(current_amount  <= 0){
+            swal("amount should be more than 0","Please choose again","error");
+        }else if(current_amount > db_num_product){
+            swal("not enough product","Just has "+db_num_product+" this product","info");
+        }else{
+            url_remove_from_cart = '/remove-from-cart/'+product_id+'/'+id_size_color+'/'+num_product;
+              //update cart and total quantity in cart
+            console.log(url_remove_from_cart);
+            $.ajax({
+                data: {},
+                url:url_remove_from_cart,
+                success: function(result){
+                  location.reload();
+                }
+            });
+        }
+    });
+
+ </script>
