@@ -13,8 +13,8 @@ class OrderDetail extends Model
     return $this->belongsTo(Order::class);
   }
 
-  public function product()
+  public function size_color()
   {
-    return $this->belongsTo(Product::class);
+    return $this->belongsTo(SizeColors::class);
   }
 }
