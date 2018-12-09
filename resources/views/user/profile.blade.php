@@ -40,6 +40,11 @@
 							<li class="nav-item">
 								<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
 							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" id="update-profile-tab" data-toggle="tab" href="#update-profile" role="tab" aria-controls="profile" aria-selected="false">Update Profile</a>
+							</li>
+
 							<li class="nav-item">
 								<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Purchase history</a>
 							</li>
@@ -98,6 +103,32 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="tab-pane fade" id="update-profile" role="tabpanel" aria-labelledby="update-profile-tab">
+							<form method="POST" action="{{ route('user', $user->id) }}">
+							 	{{ csrf_field() }}
+    						 	{{ method_field('patch') }}
+						        <div class="form-group">
+						            <label for="username">Username</label>
+						            <input name="username" type="text" class="form-control" id="username" required>
+						        </div>
+
+						        <div class="form-group">
+						            <label for="password">Password</label>
+						            <input name="password" type="password" class="form-control" id="password" required>
+						        </div>
+    							
+    							<div class="form-group">
+						            <label for="password_confirmation">Confirm Password</label>
+						            <input name="password_confirmation" type="password" class="form-control" id="password_confirmation" required>
+						        </div>
+
+						        <div class="form-group">
+						            <button type="submit" class="btn btn-primary">Update</button>
+						        </div>
+						    </form>
+						</div>						
+
 						<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 							<div class="row">
 								<div class="table-responsive">
@@ -205,3 +236,9 @@
 	@endforeach
 
 @endsection
+<script>
+	 $(document).on('click', '.calculate-total-down',function(){
+
+
+	 });
+</script>

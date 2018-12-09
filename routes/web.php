@@ -46,8 +46,9 @@ Route::get('add-to-cart/{id}/{id_size_color}/{num_product}',[
 ]);
 
 Route::get('user/{userId}', 'UserController@getUser')->name('user');
-
+Route::patch('user/{userId}',  ['as' => 'users.update', 'uses' => 'UserController@update']);
 		
+
 Route::get('remove-from-cart/{id}/{id_size_color}/{num_product}',[
 	'as'=>'removefromcart',
 	'uses'=>'CartController@getRemoveFromCart'
@@ -91,6 +92,7 @@ Route::post('register',[
 	'uses' => 'RegisterController@store',
 	'as' => 'postRegister'
 ]);
+
 
 
 Route::get('/cart',[
