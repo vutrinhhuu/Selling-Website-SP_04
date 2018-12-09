@@ -51,8 +51,7 @@
                         <img class="img-responsive pull-left flip logo hidden-xs animated fadeIn" src="{{ Voyager::image($admin_logo_img) }}" alt="Logo Icon">
                         @endif
                         <div class="copy animated fadeIn">
-                            <h1>{{ Voyager::setting('admin.title', 'Voyager') }}</h1>
-                            <p>{{ Voyager::setting('admin.description', __('voyager::login.welcome')) }}</p>
+                            <h1>{{ Voyager::setting('admin.description', 'Voyager') }}</h1>
                         </div>
                     </div> <!-- .logo-title-container -->
                 </div>
@@ -61,11 +60,11 @@
 
         <div class="col-xs-12 col-sm-5 col-md-4 login-sidebar">
 
-            <div class="login-container">
+            <div class="login-container" style="top:30%;">
 
                 <p>Join with us</p>
 
-                <form action="{{ route('login') }}" method="POST">
+                <form action="{{ route('postRegister') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="form-group form-group-default" id="emailGroup">
                         <label>Email</label>
@@ -81,9 +80,35 @@
                         </div>
                     </div>
 
+                    <div class="form-group form-group-default" id="usernameGroup">
+                        <label>Username</label>
+                        <div class="controls">
+                            <input type="text" name="username" placeholder="Username" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group-default" id="fullnameGroup">
+                        <label>Fullname</label>
+                        <div class="controls">
+                            <input type="text" name="fullname" placeholder="Fullname" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group-default" id="addressGroup">
+                        <label>Address</label>
+                        <div class="controls">
+                            <input type="text" name="address" placeholder="Address" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group form-group-default" id="phoneGroup">
+                        <label>Phone Number</label>
+                        <div class="controls">
+                            <input type="phone" name="phone" placeholder="Phone Number" class="form-control">
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-block login-button">
-                        <span class="signingin hidden"><span class="voyager-refresh"></span> {{ __('voyager::login.loggingin') }}...</span>
-                        <span class="signin">{{ __('voyager::generic.login') }}</span>
+                        <span class="signin">Register</span>
                     </button>
 
               </form>
@@ -110,6 +135,10 @@
     var form = document.forms[0];
     var email = document.querySelector('[name="email"]');
     var password = document.querySelector('[name="password"]');
+    var username = document.querySelector('[name="username"]');
+    var fullname = document.querySelector('[name="fullname"]');
+    var address = document.querySelector('[name="address"]');
+    var phone = document.querySelector('[name="phone"]');
     btn.addEventListener('click', function(ev){
         if (form.checkValidity()) {
             btn.querySelector('.signingin').className = 'signingin';
@@ -134,6 +163,34 @@
     });
     password.addEventListener('focusout', function(e){
        document.getElementById('passwordGroup').classList.remove("focused");
+    });
+
+    username.addEventListener('focusin', function(e){
+        document.getElementById('usernameGroup').classList.add("focused");
+    });
+    username.addEventListener('focusout', function(e){
+       document.getElementById('usernameGroup').classList.remove("focused");
+    });
+
+    fullname.addEventListener('focusin', function(e){
+        document.getElementById('fullnameGroup').classList.add("focused");
+    });
+    fullname.addEventListener('focusout', function(e){
+       document.getElementById('fullnameGroup').classList.remove("focused");
+    });
+
+    address.addEventListener('focusin', function(e){
+        document.getElementById('addressGroup').classList.add("focused");
+    });
+    address.addEventListener('focusout', function(e){
+       document.getElementById('addressGroup').classList.remove("focused");
+    });
+
+    phone.addEventListener('focusin', function(e){
+        document.getElementById('phoneGroup').classList.add("focused");
+    });
+    phone.addEventListener('focusout', function(e){
+       document.getElementById('phoneGroup').classList.remove("focused");
     });
 
 </script>

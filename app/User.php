@@ -16,7 +16,7 @@ class User extends \TCG\Voyager\Models\User
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email', 'password', 'username', 'address', 'avatar', 'fullname', 'phone',
     ];
 
     /**
@@ -31,5 +31,9 @@ class User extends \TCG\Voyager\Models\User
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function setPasswordAttribute($password){
+        $this->attributes['password'] = bcrypt($password);
     }
 }

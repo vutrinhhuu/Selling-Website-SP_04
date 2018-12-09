@@ -68,10 +68,29 @@ Route::get('delete-car/{id_size_color}',[
 
 $namespacePrefix = '\\'.config('voyager.controllers.namespace').'\\';
 
-Route::get('login', ['uses' => $namespacePrefix.'VoyagerAuthController@login',     'as' => 'login']);
-Route::post('login', ['uses' => $namespacePrefix.'VoyagerAuthController@postLogin', 'as' => 'postlogin']);
+Route::get('login', [
+	'uses' => $namespacePrefix.'VoyagerAuthController@login',
+	'as' => 'login'
+]);
+Route::post('login', [
+	'uses' => $namespacePrefix.'VoyagerAuthController@postLogin',
+	'as' => 'postlogin'
+]);
 
-Route::post('logout', ['uses' => 'AuthController@logout',  'as' => 'logout']);
+Route::post('logout', [
+	'uses' => 'AuthController@logout',
+	'as' => 'logout'
+]);
+
+Route::get('register',[
+	'uses' => 'RegisterController@create',
+	'as' => 'register'
+]);
+
+Route::post('register',[
+	'uses' => 'RegisterController@store',
+	'as' => 'postRegister'
+]);
 
 
 Route::get('/cart',[

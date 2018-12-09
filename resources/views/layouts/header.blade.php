@@ -53,8 +53,8 @@
               </a>
 
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href=" {{ route('login') }} ">Log in</a>
-                <a class="dropdown-item" href="#">Sign up</a>
+                <a class="dropdown-item" href="{{ route('login') }}">Log in</a>
+                <a class="dropdown-item" href="{{ route('register') }}">Sign up</a>
               </div>
             </div>
           @endif

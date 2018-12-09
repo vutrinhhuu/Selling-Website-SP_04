@@ -89,6 +89,8 @@
 
               <div style="clear:both"></div>
 
+              <p>Not a member? <a href="{{ route('register') }}">Join now</a></p>
+
               @if(!$errors->isEmpty())
               <div class="alert alert-red">
                 <ul class="list-unstyled">
