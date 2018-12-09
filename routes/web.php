@@ -46,8 +46,9 @@ Route::get('add-to-cart/{id}/{id_size_color}/{num_product}',[
 ]);
 
 Route::get('user/{userId}', 'UserController@getUser')->name('user');
-
+Route::patch('user/{userId}',  ['as' => 'users.update', 'uses' => 'UserController@update']);
 		
+
 Route::get('remove-from-cart/{id}/{id_size_color}/{num_product}',[
 	'as'=>'removefromcart',
 	'uses'=>'CartController@getRemoveFromCart'
@@ -72,6 +73,7 @@ Route::get('login', ['uses' => $namespacePrefix.'VoyagerAuthController@login',  
 Route::post('login', ['uses' => $namespacePrefix.'VoyagerAuthController@postLogin', 'as' => 'postlogin']);
 
 Route::post('logout', ['uses' => 'AuthController@logout',  'as' => 'logout']);
+
 
 
 Route::get('/cart',[

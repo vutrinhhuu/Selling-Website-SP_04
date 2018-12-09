@@ -24,4 +24,23 @@ class UserController extends Controller
             return redirect()->route('home');
         }
     }
+
+
+    public function update($userId){ 
+        if(Auth::check()){
+            $user = Auth::user();
+            if($user->id == $userId){
+                $this->validate(request(), [
+                    'username' => 'required',
+                     'password' => 'required|min:6|confirmed'
+                    
+                ]);
+                $user->username = request('username');
+                $user->password = bcrypt(request('password'));
+                $user->save();
+               
+            }
+        }
+         return back();
+    }
 }
