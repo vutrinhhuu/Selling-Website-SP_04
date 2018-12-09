@@ -54,13 +54,13 @@
                                 @foreach ($dataTypeContent->details as $item)
                                         <tr>
                                             <th>
-                                                {{ $item->product->product_code }}
+                                                {{ $item->size_color->product->product_code }}
                                             </th>
                                             <th>
-                                                {{ $item->product->name }}
+                                                {{ $item->size_color->product->name }}
                                             </th>
                                             <th>
-                                                <img src = "{{ asset('images/'.$item->product->representative_image) }}" width="100">
+                                                <img src = "{{ asset('images/'.$item->size_color->product->representative_image) }}" width="100">
                                             </th>
                                             <th>
                                                 {{ $item->quantity }}
