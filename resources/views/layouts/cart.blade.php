@@ -72,9 +72,9 @@
   </div>
 </div>
 <script type="text/javascript">
-$(document).on('click', '.show-empty-cart', function () {
-    console.log("empty cart");
-    swal("", "cart is empty", "info");
-});  
+  $(document).on('click', '.show-empty-cart', function () {
+      console.log("empty cart");
+      swal("", "Cart is empty", "info");
+  });  
 </script>
 

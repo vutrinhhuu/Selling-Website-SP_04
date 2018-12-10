@@ -16,7 +16,6 @@
 
 	<!-- Content page -->
 	<div class="container emp-profile">
-		<form method="post">
 			<div class="row">
 				<div class="col-md-4">
 					<div class="profile-img">
@@ -35,15 +34,16 @@
 						{{-- <h6>
 							Web Developer and Designer
 						</h6> --}}
-					<p class="proile-rating">NUMBER OF ORDERS : <span>{{$user->orders->count()}}</span></p>
+						<p class="proile-rating">NUMBER OF ORDERS : <span>{{$user->orders->count()}}</span></p>
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
 							<li class="nav-item">
 								<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
 							</li>
-
+							{{-- 	
 							<li class="nav-item">
 								<a class="nav-link" id="update-profile-tab" data-toggle="tab" href="#update-profile" role="tab" aria-controls="profile" aria-selected="false">Update Profile</a>
-							</li>
+							</li> 
+							--}}
 
 							<li class="nav-item">
 								<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Purchase history</a>
@@ -51,9 +51,9 @@
 						</ul>
 					</div>
 				</div>
-				{{-- <div class="col-md-2">
-					<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-				</div> --}}
+				<div class="col-md-2">
+					<a class="profile-edit-btn" href="{{ route('editUser', $user->id) }}">Edit Profile</a>
+				</div>
 			</div>
 			
 			<div class="row">
@@ -103,7 +103,7 @@
 								</div>
 							</div>
 						</div>
-
+						{{-- 
 						<div class="tab-pane fade" id="update-profile" role="tabpanel" aria-labelledby="update-profile-tab">
 							<form method="POST" action="{{ route('user', $user->id) }}">
 							 	{{ csrf_field() }}
@@ -127,7 +127,8 @@
 						            <button type="submit" class="btn btn-primary">Update</button>
 						        </div>
 						    </form>
-						</div>						
+						</div>
+						--}}
 
 						<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 							<div class="row">
@@ -182,8 +183,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</form>           
+			</div>         
 	</div>
 
 	@foreach($user->orders as $order)
@@ -236,9 +236,3 @@
 	@endforeach
 
 @endsection
-<script>
-	 $(document).on('click', '.calculate-total-down',function(){
-
-
-	 });
-</script>

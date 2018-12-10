@@ -46,7 +46,12 @@ Route::get('add-to-cart/{id}/{id_size_color}/{num_product}',[
 ]);
 
 Route::get('user/{userId}', 'UserController@getUser')->name('user');
-Route::patch('user/{userId}',  ['as' => 'users.update', 'uses' => 'UserController@update']);
+
+Route::get('user/{userId}/edit', [
+	'as' => 'editUser',
+	'uses' => 'UserController@edit'
+]);
+Route::patch('user/{userId}',  ['as' => 'updateUser', 'uses' => 'UserController@update']);
 		
 
 Route::get('remove-from-cart/{id}/{id_size_color}/{num_product}',[
