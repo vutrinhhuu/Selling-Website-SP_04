@@ -2,6 +2,8 @@
 namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use TCG\Voyager\Http\Controllers\VoyagerController;
+use App\Http\Controllers\AdminController;
 use App\Cart;
 use Session;
 
@@ -49,6 +51,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(VoyagerController::class, AdminController::class);
     }
 }

@@ -72,7 +72,7 @@ class UserController extends Controller
                     
                     // Validator để kiểm tra
                     $valid = Validator::make($posts, $rules);
-                    
+
                     // Kiểm tra nếu có lỗi
                     if ($valid->fails()) {
                         return redirect()->back()->withErrors($valid)->withInput();
