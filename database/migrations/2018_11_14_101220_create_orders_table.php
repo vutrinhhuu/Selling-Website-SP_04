@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->text('note')->nullable();
-            $table->float('total')->nullable();
+            $table->double('total', 20, 5)->nullable();
             $table->timestamp('order_day')->nullable();
             $table->integer('payment_status')->nullable();
             $table->timestamp('payment_day')->nullable();

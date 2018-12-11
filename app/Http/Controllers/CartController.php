@@ -123,7 +123,7 @@ class CartController extends Controller
 
     //tru so luong trong kho
     Session::forget('cart');
-    return view('cart.checkout_success');
+    return view('cart.checkout_success', compact('user'));
   }
 }
  
