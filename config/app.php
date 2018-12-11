@@ -174,6 +174,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
+
     ],
 
     /*
